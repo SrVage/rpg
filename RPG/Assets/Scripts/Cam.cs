@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cam : MonoBehaviour
 {
     [SerializeField] GameObject _player = null;
-    private Vector3 _offsetPos = new Vector3(0, 10, -10);
+    private Vector3 _offsetPos = new Vector3(0, 25, -25);
     private Vector3 _offsetRot = new Vector3 (45, 0, 0);
     // Start is called before the first frame update
     void Start()

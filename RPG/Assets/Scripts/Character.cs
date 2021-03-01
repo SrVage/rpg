@@ -13,10 +13,12 @@ public class Character : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        _moveTarget = transform.position;  
     }
     // Start is called before the first frame update
     void Start()
     {
+       
         
     }
 
