@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    private int _health = 0;
+    private int _attack = 0;
+    [SerializeField] private ScriptableObjectData _data;
     private Vector3 _mousePos = Vector3.zero;
     private Vector3 _moveTarget = Vector3.zero;
     private Rigidbody rb = null;
@@ -18,8 +19,26 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        Init(_data);
         
+    }
+
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(Screen.width -110, 10, 100, 100), _health.ToString());
+        if (GUI.Button(new Rect(10, Screen.height - 60, 100, 50), "Damage")) getDamage(10);
+    }
+
+    private void Init(ScriptableObjectData data)
+    {
+        _health = data.health;
+        _attack = data.attack;
+    }
+
+    public void getDamage(int damage)
+    {
+        _health -= damage;
     }
 
     // Update is called once per frame
