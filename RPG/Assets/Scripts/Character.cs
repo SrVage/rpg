@@ -11,10 +11,13 @@ public class Character : MonoBehaviour
     [SerializeField] GameObject _camera = null;
     [SerializeField] private float _speed = 0;
     private Vector3 _mult = new Vector3(1, 0, 1);
+    [SerializeField] private GameObject _flashlight = null;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         _moveTarget = transform.position;  
+
     }
     // Start is called before the first frame update
     void Start()
@@ -60,10 +63,15 @@ public class Character : MonoBehaviour
         {
             transform.Translate(Vector3.forward * Time.deltaTime * _speed);
         }
-        else if ((transform.position - _moveTarget).magnitude > 0.2 && (transform.position - _moveTarget).magnitude < 1.0)
+        else if ((transform.position - _moveTarget).magnitude > 0.3 && (transform.position - _moveTarget).magnitude < 1.0)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * (_speed * (transform.position - _moveTarget).magnitude));
         }
         else transform.Translate(0, 0, 0);
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _flashlight.SetActive(!_flashlight.activeSelf);
+        }
     }
+
 }

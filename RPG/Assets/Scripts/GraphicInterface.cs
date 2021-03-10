@@ -6,18 +6,18 @@ public class GraphicInterface : MonoBehaviour
 {
     private GUIStyle _styl;
     [SerializeField] private GUIStyle _button;
+    [SerializeField] private GameObject _flashlight = null;
+    [SerializeField] private GameObject _sun = null;
     private bool _isVisible = false;
     private string message;
 
-    private void Start()
-    {
-       // _styl.fontSize = 20;
-    }
+
 
     // Start is called before the first frame update
     private void OnGUI()
     {
-       if (!_isVisible) return;
+        if (!_flashlight.activeSelf && _sun.GetComponent<Light>().intensity < 0.4) GUI.Label(new Rect((Screen.width / 2) - 150, (Screen.height) - 100, 300, 30), "Нажмите L, чтобы включить фонарик");
+        if (!_isVisible) return;
         GUI.Box(new Rect((Screen.width/2)-100, (Screen.height / 2)-70, 200, 300), "Menu");
         if (GUI.Button(new Rect((Screen.width / 2) - 50, (Screen.height / 2), 100, 50), "Open", _button)) message = "Open";
         if (GUI.Button(new Rect((Screen.width / 2) - 50, (Screen.height / 2)+70, 100, 50), "Save", _button)) message = "Save";
@@ -31,5 +31,6 @@ public class GraphicInterface : MonoBehaviour
             _isVisible = !_isVisible;
         if (_isVisible) Time.timeScale = 0;
         else Time.timeScale = 1;
+
     }
 }
