@@ -44,7 +44,7 @@ public class Sun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.Rotate(0, 0.05f, 0, Space.Self);
+        gameObject.transform.Rotate(0, 0.01f, 0, Space.Self);
         //Debug.Log(transform.localRotation.eulerAngles.x);
         if (transform.localRotation.eulerAngles.x > 0 && transform.localRotation.eulerAngles.x <180)
             _direct.intensity = 0.03f * transform.localRotation.eulerAngles.x;
