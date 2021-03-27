@@ -10,6 +10,7 @@ public class GraphicInterface : MonoBehaviour
     [SerializeField] private GameObject _sun = null;
     private bool _isVisible = false;
     private string message;
+    private bool _teleport = false;
 
 
 
@@ -17,6 +18,7 @@ public class GraphicInterface : MonoBehaviour
     private void OnGUI()
     {
         if (!_flashlight.activeSelf && _sun.GetComponent<Light>().intensity < 0.4) GUI.Label(new Rect((Screen.width / 2) - 150, (Screen.height) - 100, 300, 30), "Нажмите L, чтобы включить фонарик");
+        if (!_teleport) GUI.Label(new Rect((Screen.width / 2) - 50, (Screen.height) - 100, 300, 30), "Нажмите T, чтобы телепортироваться к пещере");
         if (!_isVisible) return;
         GUI.Box(new Rect((Screen.width/2)-100, (Screen.height / 2)-70, 200, 300), "Menu");
         if (GUI.Button(new Rect((Screen.width / 2) - 50, (Screen.height / 2), 100, 50), "Open", _button)) message = "Open";
@@ -27,6 +29,7 @@ public class GraphicInterface : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T)) _teleport = true;
         if (Input.GetKeyDown(KeyCode.Escape))
             _isVisible = !_isVisible;
         if (_isVisible) Time.timeScale = 0;

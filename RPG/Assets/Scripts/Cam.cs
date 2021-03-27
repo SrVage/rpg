@@ -16,9 +16,19 @@ public class Cam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, _player.transform.position+_offsetPos, 2f*Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, _player.transform.position+_offsetPos, 5f*Time.deltaTime);
         _offsetPos += new Vector3(0, -1*Input.GetAxis("Mouse ScrollWheel"), 0);
         _offsetRot += new Vector3(-1*Input.GetAxis("Mouse ScrollWheel")*5, 0, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(_offsetRot), Time.deltaTime);
+        RaycastHit hit;
+        var ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
+            {
+            if (hit.collider.gameObject.CompareTag("Enemy"))
+                {
+                hit.collider.gameObject.GetComponent<Skeleton>().BacklightOn();
+                }
+        }
+
     }
 }

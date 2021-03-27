@@ -16,32 +16,6 @@ public class Sun : MonoBehaviour
         _direct = GetComponent<Light>();
     }
 
-    private void FixedUpdate()
-    {
-        //if (_time == 0)
-        //{
-        //    transform.rotation = Quaternion.Euler(Vector3.Slerp(transform.rotation.eulerAngles, _morning, 0.1f * Time.fixedDeltaTime));
-        //    if ((transform.rotation.eulerAngles - _morning).magnitude<0.2) _time = 1;
-        //}
-        //if (_time == 1)
-        //{
-        //    transform.rotation = Quaternion.Euler(Vector3.Slerp(transform.rotation.eulerAngles, _day, 0.1f * Time.fixedDeltaTime));
-        //    if ((transform.rotation.eulerAngles - _day).magnitude<0.2) _time = 2;
-        //}
-        //if (_time == 2)
-        //{
-        //    transform.rotation = Quaternion.Euler(Vector3.Slerp(transform.rotation.eulerAngles, _evening, 0.1f * Time.fixedDeltaTime));
-        //    if (transform.rotation.eulerAngles == _evening) _time = 3;
-        //}
-        //if (_time == 3)
-        //{
-        //    transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.rotation.eulerAngles, _night, 0.1f * Time.fixedDeltaTime));
-        //    if (transform.rotation.eulerAngles == _night) _time = 0;
-        //}
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
         gameObject.transform.Rotate(0, 0.01f, 0, Space.Self);

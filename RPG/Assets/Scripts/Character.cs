@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Character : MonoBehaviour
 {
@@ -6,7 +8,7 @@ public class Character : MonoBehaviour
     private int _attack = 0;
     [SerializeField] private ScriptableObjectData _data;
     private Vector3 _mousePos = Vector3.zero;
-    private Vector3 _moveTarget = Vector3.zero;
+    public Vector3 _moveTarget = Vector3.zero;
     private Rigidbody rb = null;
     [SerializeField] GameObject _camera = null;
     [SerializeField] private float _speed = 0;
@@ -21,6 +23,8 @@ public class Character : MonoBehaviour
     [SerializeField] private Transform _lefttHand = null;
     private Transform _fence = null;
     private GameObject _attackedEnemy = null;
+    private NavMeshAgent _navAgent = null;
+    [SerializeField] private Transform _teleportDestination = null;
 
     private void Awake()
     {
@@ -28,6 +32,7 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         _moveTarget = transform.position;
         _anim = GetComponent<Animator>();
+        _navAgent = GetComponent<NavMeshAgent>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -118,8 +123,40 @@ public class Character : MonoBehaviour
         _health -= damage;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            _flashlight.SetActive(!_flashlight.activeSelf);
+        }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            GetComponentInChildren<Light>().enabled = true;
+            StartCoroutine(Teleport());
+        }
+    }
+
+    IEnumerator Teleport()
+    {
+        while (GetComponentInChildren<Light>().intensity < 100)
+        {
+            GetComponentInChildren<Light>().intensity += 1f;
+            yield return null;
+        }
+        _navAgent.enabled = false;
+        gameObject.transform.position = _teleportDestination.position;
+        _moveTarget = _teleportDestination.position;
+        _navAgent.enabled = true;
+        while (GetComponentInChildren<Light>().intensity > 1)
+        {
+            GetComponentInChildren<Light>().intensity -= 1f;
+            yield return null;
+        }
+        GetComponentInChildren<Light>().enabled = false;
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         RaycastHit hit;
        var ray = _camera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -152,25 +189,19 @@ public class Character : MonoBehaviour
 
         if ((transform.position - _moveTarget).magnitude >= 2)
         {
+            rb.isKinematic = true;
             _anim.SetBool("isWalking", true);
-            rb.AddForceAtPosition(Vector3.ClampMagnitude(((_moveTarget-transform.position)*0.5f), 5f), _moveTarget, ForceMode.VelocityChange);
+            _navAgent.destination = _moveTarget;
+            _navAgent.speed = Mathf.Clamp((_moveTarget - transform.position).magnitude, 0, 5);
             _anim.SetFloat("Speed", Mathf.Clamp((_moveTarget - transform.position).magnitude*0.5f, 0, 10));
-            //transform.Translate(Vector3.forward * Time.deltaTime * _speed);
         }
-        //else if ((transform.position - _moveTarget).magnitude > 0.1 && (transform.position - _moveTarget).magnitude < 1.0)
-        //{
-        //    _anim.SetBool("isWalking", true);
-        //    rb.AddForceAtPosition((_moveTarget - transform.position).normalized * 1, _moveTarget, ForceMode.VelocityChange);
-        //}
         else {
-            rb.velocity = new Vector3(0, 0, 0);
+            //rb.isKinematic = false;
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
             _moveTarget = transform.position;
             _anim.SetBool("isWalking", false);
         }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            _flashlight.SetActive(!_flashlight.activeSelf);
-        }
+       
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
@@ -190,20 +221,35 @@ public class Character : MonoBehaviour
 
     public void Kick(GameObject enemy)
     {
-        _attackedEnemy.GetComponent<Skeleton>().Death();
-        _as.PlayOneShot(ac[2]);
+        if (_attackedEnemy.GetComponent<Skeleton>())
+        {
+            _attackedEnemy.GetComponent<Skeleton>().Death();
+            _as.PlayOneShot(ac[2]);
+        }
+        _moveTarget = transform.position;
+        _anim.SetBool("isWalking", false);
     }
 
     public void Punch()
     {
-        _attackedEnemy.GetComponent<Skeleton>().Death();
-        _as.PlayOneShot(ac[1]);
+        if (_attackedEnemy.GetComponent<Skeleton>())
+        {
+            _attackedEnemy.GetComponent<Skeleton>().Death();
+            _as.PlayOneShot(ac[1]);
+        }
+        _moveTarget = transform.position;
+        _anim.SetBool("isWalking", false);
     }
 
     public void Axe()
     {
-        _attackedEnemy.GetComponent<Skeleton>().Death();
-        _as.PlayOneShot(ac[3]);
+        if (_attackedEnemy.GetComponent<Skeleton>())
+        {
+            _attackedEnemy.GetComponent<Skeleton>().Death();
+            _as.PlayOneShot(ac[3]);
+        }
+        _moveTarget = transform.position;
+        _anim.SetBool("isWalking", false);
     }
 
 }
