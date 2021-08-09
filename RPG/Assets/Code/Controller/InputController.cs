@@ -20,16 +20,27 @@ namespace Code.Controller
         public void Run(float deltaTime)
         {
             RaycastHit hit;
-            if (!Input.GetKey(KeyCode.Mouse0)) return;
-            var ray = _camera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100f))
+            if (Input.GetMouseButtonDown(1))
             {
-                if (hit.collider.gameObject.CompareTag("Terrain"))
+                var ray = _camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
-                   _eventer.RunClicked(hit.point);
+                    _eventer.FireBullet(hit.point);
                 }
-                else if (hit.collider.gameObject.CompareTag("Enemy"))
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                var ray = _camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, 100f))
                 {
+                    if (hit.collider.gameObject.CompareTag("Terrain"))
+                    {
+                        _eventer.RunClicked(hit.point);
+                    }
+                    else if (hit.collider.gameObject.CompareTag("Enemy"))
+                    {
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Code.Controller;
+using Code.Pool;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class GameController : MonoBehaviour
     {
         _controllers = new Controllers();
         new GameInitialization(_controllers);
-        new BulletPool(_bulletConfig);
+        new CreateEnemy();
         _controllers.Init();
     }
 

@@ -16,6 +16,8 @@ namespace Code.Controller
     public class Eventer
     {
         public event Action<Vector3> Clicked;
+
+        public event Action<Vector3> Fire;
         public event Action<GameObject> ClickedObject;
 
         public event Action<State> AnimationState; 
@@ -29,9 +31,9 @@ namespace Code.Controller
             ClickedObject(clickedObject);
         }
 
-        public void State(State state)
+        public void FireBullet(Vector3 firePoint)
         {
-            
+            Fire(firePoint);
         }
     }
 }

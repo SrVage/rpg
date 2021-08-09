@@ -1,42 +1,51 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Code.Extensions;
+using Code.Interface;
 using Code.Model;
+using Code.ServiceLocator;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Code.Pool
 {
-    public sealed class BulletPool
+    public class BulletPool:IService
     {
-        private readonly Queue<Bullet> _bulletPool;
+        private readonly Queue<GameObject> _bulletPool;
         private int _poolCount;
         private Transform _rootPool;
         private GameObject _bulletPrefab;
-        private BulletConfig _bulletConfig;
 
-        public BulletPool(BulletConfig bulletConfig)
+        public BulletPool(int poolCount)
         {
-            _bulletConfig = bulletConfig;
-            _bulletPrefab = bulletConfig.BulletPrefab;
-            _poolCount = bulletConfig.PoolCount;
+            _poolCount = poolCount;
             if (!_rootPool)
             {
                 _rootPool = new GameObject(NameManger.BULLET_POOL).transform;
+                _bulletPool = new Queue<GameObject>();
             }
         }
 
-        private Bullet GetFireball()
+        public GameObject GetFireball()
         {
-            var fireball = _bulletPool.Dequeue();
-            if (fireball == null)
+            var fireball = _bulletPool.LastOrDefault(a => !a.gameObject.activeSelf);
+            
+            if (fireball==null)
             {
                 for (int i = 0; i < _poolCount; i++)
                 {
-                    var bullet = Object.Instantiate(_bulletConfig.Bullet);
-                    bullet.ReturnToPool();
+                    var bullet = GameObject.Instantiate(Resources.Load("fireBall") as GameObject, Vector3.zero, Quaternion.identity);
+                    bullet.AddTrail(Color.red).AddTrigger();
+                    bullet.GetComponent<Bullet>().ReturnToPool();
+                    
                     _bulletPool.Enqueue(bullet);
                 }
-
                 GetFireball();
             }
+
+            fireball = _bulletPool.Dequeue();
+            fireball.SetActive(true);
+            fireball.transform.parent = null;
+            fireball.GetComponent<Bullet>().Create();
             return fireball;
         }
 

@@ -1,4 +1,5 @@
-﻿using Code.Interface;
+﻿using System;
+using Code.Interface;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -10,6 +11,17 @@ namespace Code.Model
         private Transform _rootPool;
         private float _damage;
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<IDamage>()!=null)
+                other.GetComponent<IDamage>().GetDamage(10);
+            ReturnToPool();
+        }
+
+        public void Create()
+        {
+            Invoke(nameof(ReturnToPool), 2f);
+        }
 
         public Transform RootPool
         {
@@ -43,8 +55,8 @@ namespace Code.Model
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             gameObject.SetActive(false);
-            transform.SetParent(_rootPool);
-            if (_rootPool == null)
+            transform.SetParent(RootPool);
+            if (RootPool == null)
             {
                 Destroy(gameObject);
             }

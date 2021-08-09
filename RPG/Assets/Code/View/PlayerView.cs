@@ -5,7 +5,11 @@ namespace Code.View
 {
     public class PlayerView:MonoBehaviour
     {
+        [SerializeField]
+        private Transform _firePoint;
         private Animator _animator;
+
+        public Transform FirePoint => _firePoint;
 
         private void Awake()
         {
