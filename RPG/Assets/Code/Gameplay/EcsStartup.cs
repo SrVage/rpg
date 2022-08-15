@@ -1,7 +1,9 @@
 using Code.Abstract.Interfaces;
 using Code.Components.Create;
 using Code.Components.Input;
+using Code.Components.Navigation;
 using Code.Gameplay.Initialize;
+using Code.Gameplay.Move;
 using Code.Gameplay.Systems;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -27,10 +29,13 @@ namespace Code.Gameplay {
                 .Add(new BindCameraSystem())
                 .Add (new InputSystem())
                 .Add (new ClickPointHandlerSystem(Camera.main))
+                .Add(new RaycastHandlerSystem())
+                .Add(new SetTargetSystem())
                 
                 .OneFrame<ClickPoint> ()
                 .OneFrame<RaycastHits> ()
                 .OneFrame<LoadLevelDone>()
+                .OneFrame<TargetPoint>()
 
                 .Inject (_loadLevelService)
                 // .Inject (new NavMeshSupport ())

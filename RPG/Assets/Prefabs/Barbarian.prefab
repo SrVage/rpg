@@ -1530,6 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c8675dd7e5b4b1d9bd592663d196a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 5104550995926883567}
 --- !u!1 &5104550994941156594
 GameObject:
   m_ObjectHideFlags: 0

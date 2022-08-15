@@ -21,5 +21,5 @@ MonoBehaviour:
     Class: 0
     InitialHealth: 100
     InitialDamage: 20
-  SpawnPoint: {fileID: 3390045822907513868, guid: 9a7bfc3704deb4a7faa7012f0ba5dbab,
+  VirtualCamera: {fileID: 831031752010823304, guid: 15241c9d507884b1f9b17ef1f126808e,
     type: 3}
