@@ -2,7 +2,7 @@ using Code.Components.Input;
 using Leopotam.Ecs;
 using UnityEngine;
 
-namespace Client.Systems
+namespace Code.Gameplay.Systems
 {
     internal sealed class ClickPointHandlerSystem:IEcsRunSystem
     {

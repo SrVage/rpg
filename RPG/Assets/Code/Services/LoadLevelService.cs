@@ -24,7 +24,7 @@ namespace Code.Services
         
         public async void LoadMainLevel()
         {
-            UnloadLevel();   
+            //UnloadLevel();   
             var level = Addressables.InstantiateAsync(_levelsConfig.Levels[0].Prefab);
             await level.Task;
             InitializeLevelObject(level.Result);

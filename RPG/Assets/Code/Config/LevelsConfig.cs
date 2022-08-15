@@ -1,5 +1,4 @@
 using System;
-using Code.Abstract;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -12,8 +11,6 @@ namespace Code.Config
         public class Level
         {
             public AssetReference Prefab;
-            public Transform PlayerSpawnPoint;
-            public Transform[] EnemySpawnPoints;
         }
 
         public Level[] Levels;
