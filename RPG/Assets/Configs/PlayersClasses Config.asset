@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741bfeed91e469eb291db814262ce23, type: 3}
+  m_Name: PlayersClasses Config
+  m_EditorClassIdentifier: 
+  Players:
+  - Prefab:
+      m_AssetGUID: 950ed33a5b62f439c934fd0dabd9965b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    Class: 0
+    InitialHealth: 100
+    InitialDamage: 20
+  SpawnPoint: {fileID: 3390045822907513868, guid: 9a7bfc3704deb4a7faa7012f0ba5dbab,
+    type: 3}

@@ -1,0 +1,16 @@
+{
+    "name": "UI.Presenter",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3f8f479a6ea024f2591ea5fe6783b170"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
