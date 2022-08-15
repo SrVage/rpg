@@ -17,6 +17,6 @@ namespace Code.Config
             public int InitialDamage;
         }
         public PlayerClass[] Players;
-        public Transform SpawnPoint;
+        public GameObject VirtualCamera;
     }
 }

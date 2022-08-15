@@ -1,4 +1,5 @@
 using Code.Abstract.Interfaces;
+using Code.Components.Create;
 using Code.Components.Input;
 using Code.Gameplay.Initialize;
 using Code.Gameplay.Systems;
@@ -23,11 +24,13 @@ namespace Code.Gameplay {
 #endif
             _systems
                 .Add(new LoadLevelSystem())
+                .Add(new BindCameraSystem())
                 .Add (new InputSystem())
                 .Add (new ClickPointHandlerSystem(Camera.main))
                 
                 .OneFrame<ClickPoint> ()
                 .OneFrame<RaycastHits> ()
+                .OneFrame<LoadLevelDone>()
 
                 .Inject (_loadLevelService)
                 // .Inject (new NavMeshSupport ())

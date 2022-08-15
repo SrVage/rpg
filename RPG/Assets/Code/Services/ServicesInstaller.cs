@@ -10,7 +10,8 @@ namespace Code.Services
         public override void InstallBindings()
         {
             Container.Bind<EcsWorld>().FromInstance(_world).AsSingle();
-            Container.Bind<ILoadLevelService>().To<LoadLevelService>().AsSingle().NonLazy();
+            Container.Bind<ICreatePlayerService>().To<CreatePlayerService>().AsSingle().NonLazy();
+            Container.Bind<ILoadLevelService>().To<LoadLevelService>().AsSingle();
         }
     }
 }

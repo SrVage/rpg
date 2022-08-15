@@ -12,13 +12,15 @@ namespace Code.Services
     internal sealed class LoadLevelService:ILoadLevelService
     {
         private readonly LevelsConfig _levelsConfig = null;
+        private readonly ICreatePlayerService _createPlayerService = null;
         private readonly EcsWorld _world = null;
         private AsyncOperationHandle<GameObject> _level;
 
         [Inject]
-        public LoadLevelService(LevelsConfig levelsConfig, EcsWorld world)
+        public LoadLevelService(LevelsConfig levelsConfig, ICreatePlayerService createPlayerService, EcsWorld world)
         {
             _levelsConfig = levelsConfig;
+            _createPlayerService = createPlayerService;
             _world = world;
         }
         
@@ -29,6 +31,7 @@ namespace Code.Services
             await level.Task;
             InitializeLevelObject(level.Result);
             _level = level;
+            _createPlayerService.CreatePlayer(PlayersClasses.Warrior);
         }
 
         public async void LoadCaveLevel()
