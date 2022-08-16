@@ -7,9 +7,10 @@ using UnityEngine.AI;
 
 namespace Code.MonoBehaviours
 {
-    public class PlayerMonoBehaviour:MonoBehaviourToEntity
+    public class PlayerMonoBehaviour : MonoBehaviourToEntity
     {
         [SerializeField] private NavMeshAgent _navMeshAgent;
+
         public override void Initial(EcsEntity entity, EcsWorld world)
         {
             base.Initial(entity, world);

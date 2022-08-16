@@ -373,8 +373,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951900054}
-  m_LocalRotation: {x: -0.24950092, y: 0.54959816, z: 0.17635326, w: 0.7775544}
-  m_LocalPosition: {x: -3306.2266, y: -2253.671, z: -1001.8712}
+  m_LocalRotation: {x: -0.16964534, y: 0.07707442, z: 0.013307921, w: 0.98239654}
+  m_LocalPosition: {x: -1071.3158, y: 10.99987, z: -564.25586}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -497,7 +497,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7467532, y: 1}
+    m_SensorSize: {x: 1.3679653, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -624,6 +624,7 @@ MonoBehaviour:
   _playersClassesConfig: {fileID: 11400000, guid: ccc495743caba429c9276fb17b041cce,
     type: 2}
   _levelsConfig: {fileID: 11400000, guid: 37c903745341b4f1d82b2e31d03dfd23, type: 2}
+  _enemyConfig: {fileID: 11400000, guid: 296ca20a14b164e8ab07839002aa188c, type: 2}
 --- !u!114 &1376649181
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using Code.Abstract;
 using Code.Components.Input;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -6,7 +7,7 @@ namespace Code.Gameplay.Systems
 {
     internal sealed class ClickPointHandlerSystem:IEcsRunSystem
     {
-        private const float RaycastMaxDistance = 100f;
+        private const float RaycastMaxDistance = 400f;
         private readonly Camera _camera = null;
         private readonly EcsFilter<ClickPoint> _clickPoint = null;
         private readonly EcsWorld _world = null;
@@ -22,7 +23,13 @@ namespace Code.Gameplay.Systems
                 var ray = _camera.ScreenPointToRay(point);
                 if (Physics.Raycast(ray, out var hit, RaycastMaxDistance))
                 {
-                    _world.NewEntity().Get<RaycastHits>().Value = hit;
+                    if (hit.collider.TryGetComponent<EntityRef>(out var entity))
+                    {
+                    }
+                    else
+                    {
+                        _world.NewEntity().Get<RaycastHits>().Value = hit;
+                    }
                 }
             }
         }

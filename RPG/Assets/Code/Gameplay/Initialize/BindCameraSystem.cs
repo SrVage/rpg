@@ -22,6 +22,7 @@ namespace Code.Gameplay.Initialize
                 {
                     ref var camera = ref _camera.Get1(cdx).Value;
                     camera.m_Follow = playerTransform;
+                    camera.m_LookAt = playerTransform;
                 }
             }
         }

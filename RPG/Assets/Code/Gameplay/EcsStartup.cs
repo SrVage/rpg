@@ -1,7 +1,9 @@
 using Code.Abstract.Interfaces;
 using Code.Components.Create;
+using Code.Components.Enemy;
 using Code.Components.Input;
 using Code.Components.Navigation;
+using Code.Gameplay.Enemy;
 using Code.Gameplay.Initialize;
 using Code.Gameplay.Move;
 using Code.Gameplay.Systems;
@@ -13,12 +15,12 @@ namespace Code.Gameplay {
     sealed class EcsStartup : MonoBehaviour, IInitializable
     {
         [Inject] private ILoadLevelService _loadLevelService;
+        [Inject] private IEnemySpawnService _enemySpawnService;
         [Inject] private EcsWorld _world;
         
         EcsSystems _systems;
 
         public void Initialize () {
-            // void can be switched to IEnumerator for support coroutines.
             _systems = new EcsSystems (_world);
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create (_world);
@@ -31,14 +33,17 @@ namespace Code.Gameplay {
                 .Add (new ClickPointHandlerSystem(Camera.main))
                 .Add(new RaycastHandlerSystem())
                 .Add(new SetTargetSystem())
+                .Add(new EnemySpawnTimerSystem())
+                .Add(new EnemySpawnSystem())
                 
                 .OneFrame<ClickPoint> ()
                 .OneFrame<RaycastHits> ()
                 .OneFrame<LoadLevelDone>()
                 .OneFrame<TargetPoint>()
+                .OneFrame<SpawnSignal>()
 
                 .Inject (_loadLevelService)
-                // .Inject (new NavMeshSupport ())
+                .Inject (_enemySpawnService)
                 .Init ();
         }
 

@@ -1,4 +1,3 @@
-using System;
 using Code.Components;
 using Code.Components.Navigation;
 using Leopotam.Ecs;

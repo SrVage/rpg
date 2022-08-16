@@ -12,6 +12,7 @@ namespace Code.Services
             Container.Bind<EcsWorld>().FromInstance(_world).AsSingle();
             Container.Bind<ICreatePlayerService>().To<CreatePlayerService>().AsSingle().NonLazy();
             Container.Bind<ILoadLevelService>().To<LoadLevelService>().AsSingle();
+            Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
         }
     }
 }
