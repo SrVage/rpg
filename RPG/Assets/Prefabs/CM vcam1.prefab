@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 1660561650359516392}
   - component: {fileID: -5599538106994292109}
   - component: {fileID: 4448223848273949465}
+  - component: {fileID: 3169485700443294641}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_ZDamping: 5
   m_AngularDampingMode: 0
   m_PitchDamping: 0
-  m_YawDamping: 5
+  m_YawDamping: 15
   m_RollDamping: 0
   m_AngularDamping: 0
 --- !u!114 &-5599538106994292109
@@ -188,3 +189,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3169485700443294641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3609765914495215127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BindingMode: 1
+  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
+  m_AngularDampingMode: 0
+  m_PitchDamping: 0
+  m_YawDamping: 0
+  m_RollDamping: 0
+  m_AngularDamping: 0

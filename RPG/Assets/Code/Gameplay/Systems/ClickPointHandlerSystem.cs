@@ -1,4 +1,5 @@
 using Code.Abstract;
+using Code.Components.Enemy;
 using Code.Components.Input;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Code.Gameplay.Systems
                 {
                     if (hit.collider.TryGetComponent<EntityRef>(out var entity))
                     {
+                        if (entity.Entity.Has<EnemyTag>())
+                            entity.Entity.Get<AttackTarget>();
                     }
                     else
                     {

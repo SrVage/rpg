@@ -1,6 +1,7 @@
 using System.Linq;
 using Code.Abstract;
 using Code.Abstract.Interfaces;
+using Code.Components.Common;
 using Code.Components.Create;
 using Code.Config;
 using Leopotam.Ecs;
@@ -28,6 +29,10 @@ namespace Code.Services
             await playerGameObject.Task;
             var playerEntity = _world.NewEntity();
             playerGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(playerEntity, _world);
+            playerEntity.Get<Health>().Value =
+                _playersClassesConfig.Players.First(c => c.Class == characterClass).InitialHealth;
+            playerEntity.Get<Damage>().Value =
+                _playersClassesConfig.Players.First(c => c.Class == characterClass).InitialDamage;
             var camera = GameObject.Instantiate(_playersClassesConfig.VirtualCamera);
             camera.GetComponent<MonoBehaviourToEntity>().Initial(_world.NewEntity(), _world);
             _world.NewEntity().Get<LoadLevelDone>();

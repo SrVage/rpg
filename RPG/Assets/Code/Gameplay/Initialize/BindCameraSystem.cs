@@ -1,7 +1,10 @@
+using Cinemachine;
 using Code.Abstract;
 using Code.Components;
 using Code.Components.Create;
 using Leopotam.Ecs;
+using UnityEditor.iOS;
+using UnityEngine;
 
 namespace Code.Gameplay.Initialize
 {
@@ -23,6 +26,10 @@ namespace Code.Gameplay.Initialize
                     ref var camera = ref _camera.Get1(cdx).Value;
                     camera.m_Follow = playerTransform;
                     camera.m_LookAt = playerTransform;
+                    camera.DestroyCinemachineComponent<CinemachineTransposer>();
+                    var transposer = camera.AddCinemachineComponent<CinemachineTransposer>();
+                    transposer.m_FollowOffset.Set(0,40,-40);
+                    transposer.m_YawDamping = 15;
                 }
             }
         }

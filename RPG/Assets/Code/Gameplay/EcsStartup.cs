@@ -3,6 +3,8 @@ using Code.Components.Create;
 using Code.Components.Enemy;
 using Code.Components.Input;
 using Code.Components.Navigation;
+using Code.Gameplay.Battle;
+using Code.Gameplay.Character;
 using Code.Gameplay.Enemy;
 using Code.Gameplay.Initialize;
 using Code.Gameplay.Move;
@@ -32,15 +34,19 @@ namespace Code.Gameplay {
                 .Add (new InputSystem())
                 .Add (new ClickPointHandlerSystem(Camera.main))
                 .Add(new RaycastHandlerSystem())
+                .Add(new PlayerAttackSystem())
+                .Add(new DamageSystem())
                 .Add(new SetTargetSystem())
                 .Add(new EnemySpawnTimerSystem())
                 .Add(new EnemySpawnSystem())
+                .Add(new EnemyDeathSystem())
                 
                 .OneFrame<ClickPoint> ()
                 .OneFrame<RaycastHits> ()
                 .OneFrame<LoadLevelDone>()
                 .OneFrame<TargetPoint>()
                 .OneFrame<SpawnSignal>()
+                .OneFrame<AttackTarget>()
 
                 .Inject (_loadLevelService)
                 .Inject (_enemySpawnService)
