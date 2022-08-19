@@ -1,4 +1,5 @@
 using Code.Abstract.Interfaces;
+using Code.Components;
 using Code.Components.Animations;
 using Code.Components.Common;
 using Code.Components.Create;
@@ -38,9 +39,12 @@ namespace Code.Gameplay {
                 .Add (new InputSystem())
                 .Add (new ClickPointHandlerSystem(Camera.main))
                 .Add(new RaycastHandlerSystem())
-                .Add(new PlayerAttackSystem())
+                .Add(new PlayerAttackSystem<PlayerTag, EnemyTag>())
+                .Add(new PlayerAttackSystem<EnemyTag, PlayerTag>())
                 .Add(new DamageSystem())
                 .Add(new SetTargetSystem())
+                .Add(new SetEnemyTargetSystem())
+                .Add(new DelTargetSystem())
                 .Add(new CheckEndMoveSystem())
                 .Add(new EnemySpawnTimerSystem())
                 .Add(new EnemySpawnSystem())

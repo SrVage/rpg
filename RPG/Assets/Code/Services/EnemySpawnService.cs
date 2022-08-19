@@ -1,6 +1,7 @@
 using Code.Abstract;
 using Code.Abstract.Interfaces;
 using Code.Components.Common;
+using Code.Components.Navigation;
 using Code.Config;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -30,6 +31,7 @@ namespace Code.Services
             enemyEntity.Get<Health>().Value = _enemyConfig.Enemies[0].Health;
             enemyEntity.Get<Health>().Maximum = _enemyConfig.Enemies[0].Health;
             enemyEntity.Get<Damage>().Value = _enemyConfig.Enemies[0].Damage;
+            enemyEntity.Get<PatrolPoint>().Value = spawnPoint;
         }
     }
 }

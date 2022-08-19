@@ -11,11 +11,11 @@ using AnimationEvent = Code.Components.Animations.AnimationEvent;
 
 namespace Code.Gameplay.Character
 {
-    internal sealed class PlayerAttackSystem:IEcsRunSystem
+    internal sealed class PlayerAttackSystem<T1, T2>:IEcsRunSystem where T1:struct where T2:struct
     {
-        private const int AttackDistance = 9;
-        private readonly EcsFilter<GameObjectRef, PlayerTag, Damage> _player = null;
-        private readonly EcsFilter<GameObjectRef, AttackTarget> _enemy = null;
+        private const int AttackDistance = 3;
+        private readonly EcsFilter<GameObjectRef, Damage, T1> _player = null;
+        private readonly EcsFilter<GameObjectRef, AttackTarget, T2> _enemy = null;
         private readonly EcsWorld _world = null;
 
         public void Run()
@@ -36,12 +36,13 @@ namespace Code.Gameplay.Character
                     {
                         if (_player.GetEntity(pdx).Has<AnimationEvent>())
                         {
-                            ref var damage = ref _player.Get3(pdx).Value;
+                            ref var damage = ref _player.Get2(pdx).Value;
                             enemyEntity.Get<Strike>().Value = damage;
                             enemyEntity.Del<AttackTarget>();
                         }
                         else
                         {
+                            playerTransform.LookAt(enemyTransform);
                             _player.GetEntity(pdx).Get<Punch>();
                         }
                     }

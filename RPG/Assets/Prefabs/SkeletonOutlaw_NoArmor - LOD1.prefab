@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 9125329263277903349}
   - component: {fileID: 268505198662010680}
   - component: {fileID: 1869130831638605146}
+  - component: {fileID: -6516986868058599645}
   m_Layer: 0
   m_Name: SkeletonOutlaw_NoArmor - LOD1
   m_TagString: Untagged
@@ -356,7 +357,7 @@ Animator:
   m_GameObject: {fileID: 1144028080539786}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 28b668865ad9a884395ab10f675feb53, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0ca7eafc6f555b741862212a56fd50e9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 49231b63a92b54f96ab38b41c1206019, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -381,6 +382,7 @@ MonoBehaviour:
   _health: {fileID: 5311669922772810631}
   _healthTransform: {fileID: 6010777862299616072}
   _navigation: {fileID: 7826241189109636945}
+  _animator: {fileID: 95015863764320770}
 --- !u!195 &7826241189109636945
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -444,6 +446,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6516986868058599645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144028080539786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026219b5958547eb8dc243fc54fb0c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1147489988858412
 GameObject:
   m_ObjectHideFlags: 0
