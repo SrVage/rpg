@@ -23,6 +23,7 @@ namespace Code.Gameplay {
     {
         [Inject] private ILoadLevelService _loadLevelService;
         [Inject] private IEnemySpawnService _enemySpawnService;
+        [Inject] private IGameplayUIService _gameplayUIService;
         [Inject] private EcsWorld _world;
         
         EcsSystems _systems;
@@ -51,6 +52,7 @@ namespace Code.Gameplay {
                 .Add(new EnemyDeathSystem())
                 .Add(new PlayerAnimationSystem())
                 .Add(new UIHealthSystem())
+                .Add(new PlayerUIHealthSystem())
                 
                 .OneFrame<ClickPoint> ()
                 .OneFrame<RaycastHits> ()
@@ -66,6 +68,7 @@ namespace Code.Gameplay {
 
                 .Inject (_loadLevelService)
                 .Inject (_enemySpawnService)
+                .Inject (_gameplayUIService)
                 .Init ();
         }
 

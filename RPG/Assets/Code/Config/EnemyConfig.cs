@@ -14,6 +14,7 @@ namespace Code.Config
             public AssetReference Prefab;
             public int Health;
             public int Damage;
+            public int KillExperience;
         }
         public Enemy[] Enemies;
     }

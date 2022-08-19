@@ -29,8 +29,9 @@ namespace Code.Services
             await playerGameObject.Task;
             var playerEntity = _world.NewEntity();
             playerGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(playerEntity, _world);
-            playerEntity.Get<Health>().Value =
-                _playersClassesConfig.Players.First(c => c.Class == characterClass).InitialHealth;
+            var health = _playersClassesConfig.Players.First(c => c.Class == characterClass).InitialHealth;
+            playerEntity.Get<Health>().Value = health;
+            playerEntity.Get<Health>().Maximum = health;
             playerEntity.Get<Damage>().Value =
                 _playersClassesConfig.Players.First(c => c.Class == characterClass).InitialDamage;
             var camera = GameObject.Instantiate(_playersClassesConfig.VirtualCamera);

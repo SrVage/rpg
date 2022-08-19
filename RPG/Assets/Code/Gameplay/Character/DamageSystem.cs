@@ -14,7 +14,9 @@ namespace Code.Gameplay.Character
                 ref var damage = ref _attacked.Get2(adx).Value;
                 health -= damage;
                 if (health <= 0)
+                {
                     _attacked.GetEntity(adx).Get<Death>();
+                }
             }
         }
     }

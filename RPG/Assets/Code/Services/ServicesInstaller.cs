@@ -13,6 +13,7 @@ namespace Code.Services
             Container.Bind<ICreatePlayerService>().To<CreatePlayerService>().AsSingle().NonLazy();
             Container.Bind<ILoadLevelService>().To<LoadLevelService>().AsSingle();
             Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
+            Container.Bind<IGameplayUIService>().To<GameplayUIService>().AsSingle();
         }
     }
 }
