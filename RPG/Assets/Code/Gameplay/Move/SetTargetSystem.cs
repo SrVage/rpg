@@ -1,4 +1,5 @@
 using Code.Components;
+using Code.Components.Animations;
 using Code.Components.Navigation;
 using Leopotam.Ecs;
 
@@ -17,6 +18,8 @@ namespace Code.Gameplay.Move
                 {
                     ref var navigationAgent = ref _player.Get1(pdx).Value;
                     navigationAgent.destination = targetPoint;
+                    navigationAgent.isStopped = false;
+                    _player.GetEntity(pdx).Get<StartMove>();
                 }
             }
         }

@@ -1,6 +1,8 @@
 using Code.Abstract;
 using Code.Components.Enemy;
 using Leopotam.Ecs;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace Code.MonoBehaviours
 {

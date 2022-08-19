@@ -1,11 +1,13 @@
 using System;
 using Code.Abstract;
 using Code.Components;
+using Code.Components.Animations;
 using Code.Components.Common;
 using Code.Components.Input;
 using Code.Components.Navigation;
 using Leopotam.Ecs;
 using UnityEngine;
+using AnimationEvent = Code.Components.Animations.AnimationEvent;
 
 namespace Code.Gameplay.Character
 {
@@ -24,14 +26,24 @@ namespace Code.Gameplay.Character
                 foreach (var pdx in _player)
                 {
                     ref var playerTransform = ref _player.Get1(edx).Transform;
+                    ref var enemyEntity = ref _enemy.GetEntity(edx);
                     if (Vector3.SqrMagnitude(playerTransform.position - enemyTransform.position) > AttackDistance)
                     {
                         _world.NewEntity().Get<TargetPoint>().Value = enemyTransform.position;
+                        enemyEntity.Del<AttackTarget>();
                     }
                     else
                     {
-                        ref var damage = ref _player.Get3(pdx).Value;
-                        _enemy.GetEntity(edx).Get<Strike>().Value = damage;
+                        if (_player.GetEntity(pdx).Has<AnimationEvent>())
+                        {
+                            ref var damage = ref _player.Get3(pdx).Value;
+                            enemyEntity.Get<Strike>().Value = damage;
+                            enemyEntity.Del<AttackTarget>();
+                        }
+                        else
+                        {
+                            _player.GetEntity(pdx).Get<Punch>();
+                        }
                     }
                 }
             }

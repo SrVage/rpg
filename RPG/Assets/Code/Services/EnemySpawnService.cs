@@ -28,6 +28,7 @@ namespace Code.Services
             var enemyEntity = _world.NewEntity();
             enemyGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(enemyEntity, _world);
             enemyEntity.Get<Health>().Value = _enemyConfig.Enemies[0].Health;
+            enemyEntity.Get<Health>().Maximum = _enemyConfig.Enemies[0].Health;
             enemyEntity.Get<Damage>().Value = _enemyConfig.Enemies[0].Damage;
         }
     }

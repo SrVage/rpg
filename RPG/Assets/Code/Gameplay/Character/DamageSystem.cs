@@ -1,4 +1,3 @@
-using System;
 using Code.Components.Common;
 using Leopotam.Ecs;
 

@@ -43744,14 +43744,16 @@ AnimationClip:
   - time: 0.52
     functionName: Step
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 5104550994941156592, guid: 950ed33a5b62f439c934fd0dabd9965b,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.2
     functionName: Step
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 5104550994941156592, guid: 950ed33a5b62f439c934fd0dabd9965b,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -12,6 +12,9 @@ namespace Code.MonoBehaviours
             Destroy(GetComponent<NavMeshAgent>());
             Destroy(GetComponent<TriggerListener>());
             Destroy(GetComponent<EntityRef>());
+            Destroy(GetComponent<Animator>());
+            GetComponent<Rigidbody>().isKinematic = false;
+            Destroy(this);
         }
     }
 }
