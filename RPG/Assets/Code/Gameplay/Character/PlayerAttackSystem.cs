@@ -27,7 +27,7 @@ namespace Code.Gameplay.Character
                 {
                     ref var playerTransform = ref _player.Get1(edx).Transform;
                     ref var enemyEntity = ref _enemy.GetEntity(edx);
-                    if (Vector3.SqrMagnitude(playerTransform.position - enemyTransform.position) > AttackDistance)
+                    if (Vector3.Distance(playerTransform.position, enemyTransform.position) > AttackDistance)
                     {
                         _world.NewEntity().Get<TargetPoint>().Value = enemyTransform.position;
                         enemyEntity.Del<AttackTarget>();

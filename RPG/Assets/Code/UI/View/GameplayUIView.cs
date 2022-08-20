@@ -9,11 +9,13 @@ namespace Code.UI.View
         [SerializeField] private Image _health;
         [SerializeField] private Image _experience;
         [SerializeField] private TextMeshProUGUI _level;
+        [SerializeField] private RectTransform _experienceTransform;
         public Image Health => _health;
         public Image Experience => _experience;
         public string Level
         {
             set => _level.text = value;
         }
+        public RectTransform ExperienceTransform => _experienceTransform;
     }
 }

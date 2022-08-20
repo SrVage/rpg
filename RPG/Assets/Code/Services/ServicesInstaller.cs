@@ -14,6 +14,7 @@ namespace Code.Services
             Container.Bind<ILoadLevelService>().To<LoadLevelService>().AsSingle();
             Container.Bind<IEnemySpawnService>().To<EnemySpawnService>().AsSingle();
             Container.Bind<IGameplayUIService>().To<GameplayUIService>().AsSingle();
+            Container.Bind<IChangePlayerLevel>().To<ChangePlayerLevel>().AsSingle();
         }
     }
 }

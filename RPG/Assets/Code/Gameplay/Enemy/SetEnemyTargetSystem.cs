@@ -11,9 +11,9 @@ namespace Code.Gameplay.Enemy
 {
     internal sealed class SetEnemyTargetSystem:IEcsRunSystem
     {
-        private const int VisibleZone = 10;
-        private const int AttackZone = 2;
-        private const int PatrolZone = 50;
+        private const int VisibleZone = 50;
+        private const int AttackZone = 3;
+        private const int PatrolZone = 150;
         private readonly EcsFilter<NavigationAgent, EnemyTag, PatrolPoint>.Exclude<HasTarget> _enemy = null;
         private readonly EcsFilter<GameObjectRef, PlayerTag> _player = null;
         

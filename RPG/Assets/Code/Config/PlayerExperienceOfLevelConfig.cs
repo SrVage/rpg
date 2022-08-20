@@ -6,5 +6,7 @@ namespace Code.Config
     public class PlayerExperienceOfLevelConfig:ScriptableObject
     {
         public int[] Experience;
+        public int[] Damage;
+        public int[] Health;
     }
 }

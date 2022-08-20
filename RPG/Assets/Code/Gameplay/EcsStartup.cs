@@ -9,6 +9,7 @@ using Code.Components.Navigation;
 using Code.Gameplay.Battle;
 using Code.Gameplay.Character;
 using Code.Gameplay.Enemy;
+using Code.Gameplay.Experience;
 using Code.Gameplay.Initialize;
 using Code.Gameplay.Move;
 using Code.Gameplay.Systems;
@@ -24,6 +25,7 @@ namespace Code.Gameplay {
         [Inject] private ILoadLevelService _loadLevelService;
         [Inject] private IEnemySpawnService _enemySpawnService;
         [Inject] private IGameplayUIService _gameplayUIService;
+        [Inject] private IChangePlayerLevel _changePlayerLevel;
         [Inject] private EcsWorld _world;
         
         EcsSystems _systems;
@@ -40,11 +42,11 @@ namespace Code.Gameplay {
                 .Add (new InputSystem())
                 .Add (new ClickPointHandlerSystem(Camera.main))
                 .Add(new RaycastHandlerSystem())
+                .Add(new SetTargetSystem())
+                .Add(new SetEnemyTargetSystem())
                 .Add(new PlayerAttackSystem<PlayerTag, EnemyTag>())
                 .Add(new PlayerAttackSystem<EnemyTag, PlayerTag>())
                 .Add(new DamageSystem())
-                .Add(new SetTargetSystem())
-                .Add(new SetEnemyTargetSystem())
                 .Add(new DelTargetSystem())
                 .Add(new CheckEndMoveSystem())
                 .Add(new EnemySpawnTimerSystem())
@@ -53,6 +55,8 @@ namespace Code.Gameplay {
                 .Add(new PlayerAnimationSystem())
                 .Add(new UIHealthSystem())
                 .Add(new PlayerUIHealthSystem())
+                .Add(new ChangeExperienceSystem())
+                //.Add(new DeleteAttackTargetSystem())
                 
                 .OneFrame<ClickPoint> ()
                 .OneFrame<RaycastHits> ()
@@ -65,10 +69,12 @@ namespace Code.Gameplay {
                 .OneFrame<Punch>()
                 .OneFrame<AnimationEvent>()
                 .OneFrame<Strike>()
+                .OneFrame<AddExperience>()
 
                 .Inject (_loadLevelService)
                 .Inject (_enemySpawnService)
                 .Inject (_gameplayUIService)
+                .Inject (_changePlayerLevel)
                 .Init ();
         }
 

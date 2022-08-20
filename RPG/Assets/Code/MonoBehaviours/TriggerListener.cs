@@ -17,7 +17,7 @@ namespace Code.MonoBehaviours
             _entity = entity;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.TryGetComponent<EntityRef>(out var entity))
             {
@@ -26,7 +26,7 @@ namespace Code.MonoBehaviours
                     if (_entity.Has<SpawnTimer>())
                         return;
                     _world.NewEntity().Get<SpawnSignal>().Value = transform.position;
-                    _entity.Get<SpawnTimer>().Value = 10;
+                    _entity.Get<SpawnTimer>().Value = 20;
                 }
                 /*ref var entity = ref _world.NewEntity().Get<AttackTrigger>();
                 entity.Entity = other.GetComponentInParent<EntityRef>().Entity;

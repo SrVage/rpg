@@ -20,6 +20,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     Health: 60
     Damage: 5
+    KillExperience: 10
   - Prefab:
       m_AssetGUID: 
       m_SubObjectName: 
@@ -27,3 +28,4 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     Health: 0
     Damage: 0
+    KillExperience: 0

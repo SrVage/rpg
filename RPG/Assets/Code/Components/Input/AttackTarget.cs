@@ -2,8 +2,7 @@ using Leopotam.Ecs;
 
 namespace Code.Components.Input
 {
-    public struct AttackTarget:IEcsIgnoreInFilter
+    public struct AttackTarget
     {
-        
     }
 }

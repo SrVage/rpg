@@ -10,12 +10,12 @@ namespace Code.Gameplay.Battle
     internal sealed class EnemyDeathSystem:IEcsRunSystem
     {
         private readonly EcsFilter<GameObjectRef, Death, KillExperience> _death = null;
-        private readonly EcsFilter<PlayerTag, AddExperience> _player = null;
+        private readonly EcsFilter<PlayerTag> _player = null;
         public void Run()
         {
             foreach (var ddx in _death)
             {
-                ref var experience = ref _death.Get3(ddx).Value;
+                var experience = _death.Get3(ddx).Value;
                 foreach (var pdx in _player)
                 {
                     _player.GetEntity(pdx).Get<AddExperience>().Value = experience;

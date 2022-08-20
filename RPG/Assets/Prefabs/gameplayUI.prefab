@@ -434,6 +434,7 @@ MonoBehaviour:
   _health: {fileID: 2025931537715465934}
   _experience: {fileID: 2025931536158134215}
   _level: {fileID: 2025931536851141105}
+  _experienceTransform: {fileID: 2025931537166371985}
 --- !u!1 &2025931537715465932
 GameObject:
   m_ObjectHideFlags: 0
