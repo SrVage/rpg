@@ -7,5 +7,6 @@ namespace Code.Abstract.Interfaces
         void ChangeHealth(float percent);
         void ChangeExperience(float experience);
         void ChangeLevel(int level);
+        void ShowGamePlayUI();
     }
 }

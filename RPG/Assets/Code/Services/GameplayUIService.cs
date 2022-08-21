@@ -20,5 +20,8 @@ namespace Code.Services
 
         public void ChangeLevel(int level) =>
             _gameplayUIPresenter.ChangeLevel(level);
+
+        public void ShowGamePlayUI() =>
+            _gameplayUIPresenter.Show();
     }
 }

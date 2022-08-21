@@ -31,7 +31,7 @@ namespace Code.Services
             await level.Task;
             InitializeLevelObject(level.Result);
             _level = level;
-            _createPlayerService.CreatePlayer(PlayersClasses.Warrior);
+            _createPlayerService.CreatePlayer();
         }
 
         public async void LoadCaveLevel()

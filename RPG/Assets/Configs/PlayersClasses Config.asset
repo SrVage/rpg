@@ -19,7 +19,11 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     Class: 0
-    InitialHealth: 100
-    InitialDamage: 20
+    Health: 100
+    Damage: 20
+    Avatar: {fileID: 21300000, guid: 80946f58a633b4cab9aba653561cf7f3, type: 3}
+    PlayerName: 
+    Level: 0
+    XP: 0
   VirtualCamera: {fileID: 831031752010823304, guid: 15241c9d507884b1f9b17ef1f126808e,
     type: 3}

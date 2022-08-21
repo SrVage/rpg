@@ -30,5 +30,10 @@ namespace Code.UI.Presenter
                 .Append(_gameplayUIView.ExperienceTransform.DOScale(1f, 1f))
                 .OnComplete(() => _gameplayUIView.Level = level.ToString());
         }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

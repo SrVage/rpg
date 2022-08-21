@@ -533,7 +533,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5681819, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -845,10 +845,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -910,4 +910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameplayUIPresenter: {fileID: 5862624383345119419, guid: f55b52f70b5c24fbd97cfcfecfda5f8f,
+    type: 3}
+  _playfabCharacterPresenter: {fileID: 7018674814940878883, guid: 92329db51c1b9446da4b372788e4fd26,
+    type: 3}
+  _gamePauseMenuPresenter: {fileID: 4381710566993659074, guid: 67fc437a8831444e889f599134269426,
     type: 3}
