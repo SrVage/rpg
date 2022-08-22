@@ -10,6 +10,7 @@ namespace Code.UI.View
         [SerializeField] private Image _experience;
         [SerializeField] private TextMeshProUGUI _level;
         [SerializeField] private RectTransform _experienceTransform;
+        [SerializeField] private Button _menu;
         public Image Health => _health;
         public Image Experience => _experience;
         public string Level
@@ -17,5 +18,6 @@ namespace Code.UI.View
             set => _level.text = value;
         }
         public RectTransform ExperienceTransform => _experienceTransform;
+        public Button Menu => _menu;
     }
 }

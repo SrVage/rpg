@@ -1,5 +1,6 @@
 using Code.Abstract;
 using Code.Abstract.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,7 +15,7 @@ namespace Code.MonoBehaviours
             Destroy(GetComponent<EntityRef>());
             Destroy(GetComponent<Animator>());
             GetComponent<Rigidbody>().isKinematic = false;
-            Destroy(this);
+            DOTween.Sequence().AppendInterval(5f).Append(transform.DOScale(0.1f, 2f).OnComplete(()=>Destroy(gameObject)));
         }
     }
 }

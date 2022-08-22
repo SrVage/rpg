@@ -12,7 +12,9 @@ namespace Code.UI.Presenter
         [SerializeField] private SelectPlayerView[] _playerSlots;
         [SerializeField] private CreateCharacterView _createCharacterView;
         [SerializeField] private Button _startGame;
-        [Inject] private IPlayfabCharacterService _playfabCharacterService = null;
+        [SerializeField] private Button _startOnlineGame;
+        [SerializeField] private PUNConnect _punConnect;
+        private IPlayfabCharacterService _playfabCharacterService = null;
         [Inject] private DiContainer _container;
         private int? _currentPlayer;
         
@@ -29,8 +31,20 @@ namespace Code.UI.Presenter
                 _playerSlots[i].CreateNewCharacter += CreateNewCharacter;
                 _playerSlots[i].SelectCharacter += SelectCharacter;
             }
-            _playfabCharacterService.GetCharacters();
             _startGame.onClick.AddListener(StartGame);
+            _startOnlineGame.onClick.AddListener(StartOnlineGame);
+        }
+
+        private void StartOnlineGame()
+        {
+            _punConnect.Connect(StartGame);
+        }
+
+        public void GetService(IPlayfabCharacterService playfabCharacterService)
+        {
+            _createCharacterView.GetService(playfabCharacterService);
+            _playfabCharacterService = playfabCharacterService;
+            _playfabCharacterService.GetCharacters();
         }
 
         private void StartGame()

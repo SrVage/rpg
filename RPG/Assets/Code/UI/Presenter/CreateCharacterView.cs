@@ -1,7 +1,5 @@
-using System.Collections.Generic;
+using Code.Abstract.Interfaces;
 using Code.Config;
-using PlayFab;
-using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +9,6 @@ namespace Code.UI.Presenter
 {
     public class CreateCharacterView:MonoBehaviour
     {
-        private const string ItemID = "SteelSword";
         [SerializeField] private TMP_Dropdown _selectClass;
         [SerializeField] private TMP_InputField _characterNameInputField;
         [SerializeField] private TextMeshProUGUI _healthText;
@@ -20,6 +17,7 @@ namespace Code.UI.Presenter
         [SerializeField] private Button _createButton;
         [SerializeField] private Button _closeButton;
         [Inject] private PlayersClassesConfig _classConfig;
+        private IPlayfabCharacterService _playfabCharacterService;
         private int _health;
         private int _damage;
         private string _characterName;
@@ -28,10 +26,19 @@ namespace Code.UI.Presenter
         {
             _characterNameInputField.onValueChanged.AddListener(OnNameChanged);
             _selectClass.onValueChanged.AddListener(OnClassChanged);
-            _createButton.onClick.AddListener(MakePurchase);
+            _createButton.onClick.AddListener(() =>
+            {
+                _playfabCharacterService.CreateCharacter(_characterName, _health, _damage, _selectClass.value, Hide);
+            });
             _closeButton.onClick.AddListener(() => gameObject.SetActive(false));
             OnClassChanged(0);
         }
+        
+        public void GetService(IPlayfabCharacterService playfabCharacterService) => 
+            _playfabCharacterService = playfabCharacterService;
+
+        private void Hide() => 
+            gameObject.SetActive(false);
 
         private void OnClassChanged(int characterClass)
         {
@@ -48,57 +55,6 @@ namespace Code.UI.Presenter
         public void Active() => 
             gameObject.SetActive(true);
         
-        void MakePurchase() {
-            PlayFabClientAPI.PurchaseItem(new PurchaseItemRequest {
-                // In your game, this should just be a constant matching your primary catalog
-                CatalogVersion = "Things",
-                ItemId = ItemID,
-                Price = 0,
-                VirtualCurrency = "GC"
-            }, LogSuccess, LogFailure);
-        }
 
-        private void LogFailure(PlayFabError obj)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void LogSuccess(PurchaseItemResult obj)
-        {
-            CreateCharacterWithItemId();
-        }
-
-        public void CreateCharacterWithItemId()
-        {
-            
-            PlayFabClientAPI.GrantCharacterToUser(new GrantCharacterToUserRequest
-            {
-                CharacterName = _characterName,
-                ItemId = ItemID
-            }, result =>
-            {
-                UpdateCharacterStatistics(result.CharacterId);
-            }, Debug.LogError);
-        }
-        private void UpdateCharacterStatistics(string characterId)
-        {
-            PlayFabClientAPI.UpdateCharacterStatistics(new UpdateCharacterStatisticsRequest
-                {
-                    CharacterId = characterId,
-                    CharacterStatistics = new Dictionary<string, int>
-                    {
-                        {"Class", _selectClass.value},
-                        {"Level", 0},
-                        {"XP", 0},
-                        {"Damage", _damage},
-                        {"Health", _health},
-                    }
-                }, result =>
-                {
-                    Debug.Log($"Initial stats set, telling client to update character list");
-                    gameObject.SetActive(false);
-                },
-                Debug.LogError);
-        }
     }
 }

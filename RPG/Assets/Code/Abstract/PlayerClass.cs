@@ -15,5 +15,6 @@ namespace Code.Abstract
         [HideInInspector] public string PlayerName;
         [HideInInspector] public int Level;
         [HideInInspector] public int XP;
+        [HideInInspector] public string CharacterID;
     }
 }

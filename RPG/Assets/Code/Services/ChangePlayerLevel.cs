@@ -10,6 +10,7 @@ namespace Code.Services
     {
         private readonly PlayerExperienceOfLevelConfig _experienceOfLevelConfig = null;
         private readonly IGameplayUIService _gameplayUIService = null;
+        private readonly IPlayerSaveService _playerSaveService = null;
         private EcsEntity _player;
 
         public ChangePlayerLevel(PlayerExperienceOfLevelConfig playerExperienceOfLevelConfig, 

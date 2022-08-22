@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Abstract;
@@ -12,11 +13,17 @@ namespace Code.Services
 {
     internal sealed class PlayfabCharacterService:IPlayfabCharacterService
     {
+        private const string ItemID = "SteelSword";
         private readonly PlayersClassesConfig _classesConfig = null;
         private readonly PlayfabCharacterPresenter _playfabCharacterPresenter = null;
         private readonly IChoosePlayerService _choosePlayerService = null;
         private List<CharacterResult> _characters = new();
         private List<PlayerClass> _characterInfos = new List<PlayerClass>();
+        private string _characterName;
+        private int _health;
+        private int _damage;
+        private int _selectClass;
+        private Action _action;
 
         public PlayfabCharacterService(PlayersClassesConfig classesConfig, 
             PlayfabCharacterPresenter playfabCharacterPresenter,
@@ -25,28 +32,9 @@ namespace Code.Services
             _classesConfig = classesConfig;
             _playfabCharacterPresenter = playfabCharacterPresenter;
             _choosePlayerService = choosePlayerService;
+            _playfabCharacterPresenter.GetService(this);
         }
-        public void UpdateCharacterStatistics(int player)
-        {
-            PlayFabClientAPI.UpdateCharacterStatistics(new UpdateCharacterStatisticsRequest
-                {
-                    CharacterId = _characters[player].CharacterId,
-                    CharacterStatistics = new Dictionary<string, int>
-                    {
-                        {"Class", (int)_characterInfos[player].Class},
-                        {"Level", _characterInfos[player].Level},
-                        {"XP", _characterInfos[player].XP},
-                        {"Damage", _characterInfos[player].Damage},
-                        {"Health", _characterInfos[player].Health},
-                    }
-                }, result =>
-                {
-                    Debug.Log($"Initial stats set, telling client to update character list");
-                    GetCharacters();
-                },
-                Debug.LogError);
-        }
-        
+
         public void GetCharacters()
         {
             PlayFabClientAPI.GetAllUsersCharacters(new ListUsersCharactersRequest(),
@@ -56,6 +44,7 @@ namespace Code.Services
                     if (_characters.Count > 0)
                     {
                         _characters.Clear();
+                        _characterInfos.Clear();
                     }
                     foreach (var characterResult in res.Characters)
                     {
@@ -76,13 +65,96 @@ namespace Code.Services
                                     XP = statistic["XP"],
                                     Health = statistic["Health"],
                                     Damage = statistic["Damage"],
-                                    Avatar =  _classesConfig.Players[statistic["Class"]].Avatar
+                                    Avatar =  _classesConfig.Players[statistic["Class"]].Avatar,
+                                    CharacterID = characterResult.CharacterId
                                 });
                             },
                             error => Debug.Log(error.Error));
                     }
                     SendStatistic();
                 }, 
+                Debug.LogError);
+        }
+
+        public void CreateCharacter(string name, int health, int damage, int selectClass, Action end)
+        {
+            _characterName = name;
+            _health = health;
+            _damage = damage;
+            _selectClass = selectClass;
+            _action = end;
+            MakePurchase();
+        }
+
+        private void MakePurchase() {
+            PlayFabClientAPI.PurchaseItem(new PurchaseItemRequest {
+                CatalogVersion = "Things",
+                ItemId = ItemID,
+                Price = 0,
+                VirtualCurrency = "GC"
+            }, LogSuccess, LogFailure);
+        }
+
+        private void LogFailure(PlayFabError obj)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void LogSuccess(PurchaseItemResult obj) => 
+            CreateCharacterWithItemId();
+
+        private void CreateCharacterWithItemId()
+        {
+            
+            PlayFabClientAPI.GrantCharacterToUser(new GrantCharacterToUserRequest
+            {
+                CharacterName = _characterName,
+                ItemId = ItemID
+            }, result =>
+            {
+                UpdateCharacterStatistics(result.CharacterId);
+            }, Debug.LogError);
+        }
+
+        public void UpdateCharacterStatistics()
+        {
+            PlayFabClientAPI.UpdateCharacterStatistics(new UpdateCharacterStatisticsRequest
+                {
+                    CharacterId = _choosePlayerService.GetPlayer.CharacterID,
+                    CharacterStatistics = new Dictionary<string, int>
+                    {
+                        {"Class", (int)_choosePlayerService.GetPlayer.Class},
+                        {"Level", _choosePlayerService.GetPlayer.Level},
+                        {"XP", _choosePlayerService.GetPlayer.XP},
+                        {"Damage", _choosePlayerService.GetPlayer.Damage},
+                        {"Health", _choosePlayerService.GetPlayer.Health},
+                    }
+                }, result =>
+                {
+                    Debug.Log($"Initial stats set, telling client to update character list");
+                },
+                Debug.LogError);
+        }
+
+        public void UpdateCharacterStatistics(string characterId)
+        {
+            PlayFabClientAPI.UpdateCharacterStatistics(new UpdateCharacterStatisticsRequest
+                {
+                    CharacterId = characterId,
+                    CharacterStatistics = new Dictionary<string, int>
+                    {
+                        {"Class", _selectClass},
+                        {"Level", 0},
+                        {"XP", 0},
+                        {"Damage", _damage},
+                        {"Health", _health},
+                    }
+                }, result =>
+                {
+                    _action.Invoke();
+                    _action = null;
+                    GetCharacters();
+                },
                 Debug.LogError);
         }
 

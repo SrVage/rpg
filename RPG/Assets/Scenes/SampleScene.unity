@@ -664,6 +664,7 @@ MonoBehaviour:
   _enemyConfig: {fileID: 11400000, guid: 296ca20a14b164e8ab07839002aa188c, type: 2}
   _playerExperienceOfLevelConfig: {fileID: 11400000, guid: 60eee041b703a4193883cf098a4326eb,
     type: 2}
+  _soundsConfig: {fileID: 11400000, guid: 97c1ec2ba687c4f24af60ae8cc7f59b3, type: 2}
 --- !u!114 &1376649181
 MonoBehaviour:
   m_ObjectHideFlags: 0

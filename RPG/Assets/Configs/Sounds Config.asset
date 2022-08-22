@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5912c48e8a94381a949937b6d84bc80, type: 3}
+  m_Name: Sounds Config
+  m_EditorClassIdentifier: 
+  PlayerStep: {fileID: 8300000, guid: 2bb3a6772fa59a74b99da84dc6c792d6, type: 3}
+  PlayerAttack: {fileID: 8300000, guid: 7ce18e161f9c4449aa532c3be6135a2a, type: 3}
+  EnemyAttack: {fileID: 8300000, guid: 3ee3a13c48a081643b02c7f9d4966f47, type: 3}

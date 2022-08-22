@@ -1,11 +1,14 @@
+using System;
 using PlayFab.ClientModels;
 
 namespace Code.Abstract.Interfaces
 {
     public interface IPlayfabCharacterService
     {
-        void UpdateCharacterStatistics(int player);
+        void UpdateCharacterStatistics();
         void GetCharacters();
         void SelectCharacter(int id);
+        void CreateCharacter(string name, int health, int damage, int selectClass, Action end);
+        void UpdateCharacterStatistics(string characterId);
     }
 }

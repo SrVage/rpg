@@ -8,7 +8,7 @@ namespace Code.Gameplay.Move
     internal sealed class SetTargetSystem:IEcsRunSystem
     {
         private readonly EcsFilter<TargetPoint> _target = null;
-        private readonly EcsFilter<NavigationAgent, PlayerTag> _player = null;
+        private readonly EcsFilter<NavigationAgent, PlayerTag>.Exclude<IsAnimation> _player = null;
         public void Run()
         {
             foreach (var tdx in _target)

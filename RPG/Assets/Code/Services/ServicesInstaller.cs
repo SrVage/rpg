@@ -17,6 +17,7 @@ namespace Code.Services
             Container.Bind<IGameplayUIService>().To<GameplayUIService>().AsSingle();
             Container.Bind<IChangePlayerLevel>().To<ChangePlayerLevel>().AsSingle();
             Container.Bind<IPlayfabCharacterService>().To<PlayfabCharacterService>().AsSingle();
+            Container.Bind<IPlayerSaveService>().To<PlayerSaveService>().AsSingle();
         }
     }
 }

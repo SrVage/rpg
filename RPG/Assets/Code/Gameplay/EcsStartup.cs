@@ -1,11 +1,13 @@
 using Code.Abstract.Interfaces;
 using Code.Components;
 using Code.Components.Animations;
+using Code.Components.Audio;
 using Code.Components.Common;
 using Code.Components.Create;
 using Code.Components.Enemy;
 using Code.Components.Input;
 using Code.Components.Navigation;
+using Code.Config;
 using Code.Gameplay.Battle;
 using Code.Gameplay.Character;
 using Code.Gameplay.Enemy;
@@ -26,6 +28,7 @@ namespace Code.Gameplay {
         [Inject] private IEnemySpawnService _enemySpawnService;
         [Inject] private IGameplayUIService _gameplayUIService;
         [Inject] private IChangePlayerLevel _changePlayerLevel;
+        [Inject] private SoundsConfig _soundsConfig;
         [Inject] private EcsWorld _world;
         
         EcsSystems _systems;
@@ -56,6 +59,7 @@ namespace Code.Gameplay {
                 .Add(new UIHealthSystem())
                 .Add(new PlayerUIHealthSystem())
                 .Add(new ChangeExperienceSystem())
+                .Add(new PlayAudioSystem())
                 //.Add(new DeleteAttackTargetSystem())
                 
                 .OneFrame<ClickPoint> ()
@@ -70,11 +74,14 @@ namespace Code.Gameplay {
                 .OneFrame<AnimationEvent>()
                 .OneFrame<Strike>()
                 .OneFrame<AddExperience>()
+                .OneFrame<StepAudio>()
+                .OneFrame<AttackAudio>()
 
                 .Inject (_loadLevelService)
                 .Inject (_enemySpawnService)
                 .Inject (_gameplayUIService)
                 .Inject (_changePlayerLevel)
+                .Inject (_soundsConfig)
                 .Init ();
         }
 

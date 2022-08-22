@@ -8,6 +8,7 @@ namespace Code.UI.Presenter
     public class GameplayUIPresenter:MonoBehaviour
     {
         [SerializeField] private GameplayUIView _gameplayUIView;
+        [Inject] private GamePauseMenuPresenter _gamePauseMenuPresenter;
 
         [Inject]
         public void Init()
@@ -16,6 +17,7 @@ namespace Code.UI.Presenter
             var rect = GetComponent<RectTransform>();
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
+            _gameplayUIView.Menu.onClick.AddListener(()=>_gamePauseMenuPresenter.gameObject.SetActive(true));
         }
         public void ChangeHealth(float percent) => 
             _gameplayUIView.Health.fillAmount = percent;
