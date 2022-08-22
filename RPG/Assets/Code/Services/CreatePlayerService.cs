@@ -6,6 +6,7 @@ using Code.Components.Create;
 using Code.Components.Player;
 using Code.Config;
 using Leopotam.Ecs;
+using Photon.Pun;
 using UnityEngine;
 using Zenject;
 
@@ -19,11 +20,13 @@ namespace Code.Services
         private readonly IGameplayUIService _gameplayUIService = null;
         private readonly IChoosePlayerService _choosePlayerService = null;
         private readonly IPlayerSaveService _playerSaveService = null;
+        private readonly IGameTypeService _gameTypeService = null;
 
         [Inject]
         public CreatePlayerService(EcsWorld world, PlayersClassesConfig playersClassesConfig,
             IChangePlayerLevel changePlayerLevel, IGameplayUIService gameplayUIService,
-            IChoosePlayerService choosePlayerService, IPlayerSaveService playerSaveService)
+            IChoosePlayerService choosePlayerService, IPlayerSaveService playerSaveService,
+            IGameTypeService gameTypeService)
         {
             _world = world;
             _playersClassesConfig = playersClassesConfig;
@@ -31,16 +34,24 @@ namespace Code.Services
             _gameplayUIService = gameplayUIService;
             _choosePlayerService = choosePlayerService;
             _playerSaveService = playerSaveService;
+            _gameTypeService = gameTypeService;
         }
 
-        public async void CreatePlayer()
+        public void CreatePlayer()
+        {
+            if (_gameTypeService.IsOnline)
+                CreateNetworkPlayer();
+            else
+                CreateLocalPlayer();
+        }
+
+        private void CreateLocalPlayer()
         {
             PlayersClasses classes = _choosePlayerService.GetPlayer.Class;
             var playerPrefab = _playersClassesConfig.Players.First(c => c.Class == classes).Prefab;
-            var playerGameObject = playerPrefab.InstantiateAsync();
-            await playerGameObject.Task;
+            var playerGameObject = Object.Instantiate(playerPrefab);
             var playerEntity = _world.NewEntity();
-            playerGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(playerEntity, _world);
+            playerGameObject.GetComponent<MonoBehaviourToEntity>().Initial(playerEntity, _world);
             var health = _choosePlayerService.GetPlayer.Health;
             playerEntity.Get<Experience>().Level = _choosePlayerService.GetPlayer.Level;
             playerEntity.Get<Experience>().Value = _choosePlayerService.GetPlayer.XP;
@@ -56,15 +67,13 @@ namespace Code.Services
             _gameplayUIService.ChangeLevel(_choosePlayerService.GetPlayer.Level);
             _changePlayerLevel.ChangeExperience(0);
         }
-        /*public async void CreateNetworkPlayer()
+        private void CreateNetworkPlayer()
         {
             PlayersClasses classes = _choosePlayerService.GetPlayer.Class;
             var playerPrefab = _playersClassesConfig.Players.First(c => c.Class == classes).Prefab;
-            PhotonNetwork.Instantiate(playerPrefab.SubObjectName);
-            var playerGameObject = playerPrefab.InstantiateAsync();
-            await playerGameObject.Task;
+            var playerGameObject = PhotonNetwork.Instantiate(playerPrefab.name, playerPrefab.transform.position, Quaternion.identity);
             var playerEntity = _world.NewEntity();
-            playerGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(playerEntity, _world);
+            playerGameObject.GetComponent<MonoBehaviourToEntity>().Initial(playerEntity, _world);
             var health = _choosePlayerService.GetPlayer.Health;
             playerEntity.Get<Experience>().Level = _choosePlayerService.GetPlayer.Level;
             playerEntity.Get<Experience>().Value = _choosePlayerService.GetPlayer.XP;
@@ -79,6 +88,6 @@ namespace Code.Services
             _gameplayUIService.ShowGamePlayUI();
             _gameplayUIService.ChangeLevel(_choosePlayerService.GetPlayer.Level);
             _changePlayerLevel.ChangeExperience(0);
-        }*/
+        }
     }
 }

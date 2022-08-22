@@ -17,10 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 4fc4d45bb1b3440fa8327191f9a11b5d
   m_SerializeEntries:
-  - m_GUID: 950ed33a5b62f439c934fd0dabd9965b
-    m_Address: Barbarian
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: 870982cf02cc258429948de0da1e4ad8
     m_Address: SkeletonOutlawArmor
     m_ReadOnly: 0

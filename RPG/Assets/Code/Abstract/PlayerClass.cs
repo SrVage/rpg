@@ -7,7 +7,7 @@ namespace Code.Abstract
     [Serializable]
     public class PlayerClass
     {
-        public AssetReference Prefab;
+        public GameObject Prefab;
         public PlayersClasses Class;
         public int Health;
         public int Damage;

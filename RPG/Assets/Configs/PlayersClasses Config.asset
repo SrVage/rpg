@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: PlayersClasses Config
   m_EditorClassIdentifier: 
   Players:
-  - Prefab:
-      m_AssetGUID: 950ed33a5b62f439c934fd0dabd9965b
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
+  - Prefab: {fileID: 5104550994941156592, guid: 950ed33a5b62f439c934fd0dabd9965b,
+      type: 3}
     Class: 0
     Health: 100
     Damage: 20
@@ -25,5 +22,6 @@ MonoBehaviour:
     PlayerName: 
     Level: 0
     XP: 0
+    CharacterID: 
   VirtualCamera: {fileID: 831031752010823304, guid: 15241c9d507884b1f9b17ef1f126808e,
     type: 3}

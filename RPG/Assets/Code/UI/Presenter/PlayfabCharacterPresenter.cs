@@ -16,6 +16,7 @@ namespace Code.UI.Presenter
         [SerializeField] private PUNConnect _punConnect;
         private IPlayfabCharacterService _playfabCharacterService = null;
         [Inject] private DiContainer _container;
+        [Inject] private IGameTypeService _gameTypeService;
         private int? _currentPlayer;
         
         [Inject]
@@ -38,6 +39,7 @@ namespace Code.UI.Presenter
         private void StartOnlineGame()
         {
             _punConnect.Connect(StartGame);
+            _gameTypeService.IsOnline = true;
         }
 
         public void GetService(IPlayfabCharacterService playfabCharacterService)

@@ -3,8 +3,6 @@ using Code.Abstract;
 using Code.Components;
 using Code.Components.Create;
 using Leopotam.Ecs;
-using UnityEditor.iOS;
-using UnityEngine;
 
 namespace Code.Gameplay.Initialize
 {

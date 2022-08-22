@@ -18,6 +18,7 @@ namespace Code.Services
             Container.Bind<IChangePlayerLevel>().To<ChangePlayerLevel>().AsSingle();
             Container.Bind<IPlayfabCharacterService>().To<PlayfabCharacterService>().AsSingle();
             Container.Bind<IPlayerSaveService>().To<PlayerSaveService>().AsSingle();
+            Container.Bind<IGameTypeService>().To<GameTypeService>().AsSingle();
         }
     }
 }
