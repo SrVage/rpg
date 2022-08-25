@@ -19,7 +19,7 @@ namespace Code.Services
         public async void Update()
         {
             Debug.Log(this);
-            await Task.Delay(1000);
+            await Task.Delay(2000);
             var gameObjects = Object.FindObjectsOfType<MonoBehaviourToEntity>();
             foreach (var gameObject in gameObjects)
             {
