@@ -34,6 +34,8 @@ namespace Code.MonoBehaviours
                 }
                 entity.Get<HealthNetworkRef>().Value = gameObject.GetComponent<HealthNetwork>();
                 gameObject.GetComponent<HealthNetwork>().SetEntity(entity);
+                entity.Get<DamageNetworkRef>().Value = gameObject.GetComponent<DamageNetwork>();
+                gameObject.GetComponent<DamageNetwork>().SetEntity(entity);
             }
             else
                 entity.Get<PlayerTag>();

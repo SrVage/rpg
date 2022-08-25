@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.MonoBehaviours
 {
-    public class DamageNetwork:MonoBehaviourPunCallbacks, IPunObservable, IHealth
+    public class DamageNetwork:MonoBehaviourPunCallbacks, IPunObservable, IDamage
     {
         private int _damage;
         private EcsEntity _entity;
@@ -16,7 +16,7 @@ namespace Code.MonoBehaviours
         
         public int GetDamage() => _damage;
 
-        public void SetHealth(int health)
+        public void SetDamage(int health)
         {
             _damage = health;
         }
