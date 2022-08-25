@@ -38,6 +38,11 @@ namespace Code.Gameplay.Character
                         {
                             ref var damage = ref _player.Get2(pdx).Value;
                             enemyEntity.Get<Strike>().Value = damage;
+                            if (enemyEntity.Has<DamageNetworkRef>())
+                            {
+                                ref var damageNetwork = ref enemyEntity.Get<DamageNetworkRef>().Value;
+                                damageNetwork.SetDamage(damage);
+                            }
                             enemyEntity.Del<AttackTarget>();
                             _player.GetEntity(pdx).Del<IsAnimation>();
                         }
