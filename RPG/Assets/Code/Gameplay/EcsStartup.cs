@@ -29,6 +29,7 @@ namespace Code.Gameplay {
         [Inject] private IEnemySpawnService _enemySpawnService;
         [Inject] private IGameplayUIService _gameplayUIService;
         [Inject] private IChangePlayerLevel _changePlayerLevel;
+        [Inject] private IUpdateEcsGameService _updateEcsGameService;
         [Inject] private SoundsConfig _soundsConfig;
         [Inject] private EcsWorld _world;
         
@@ -86,6 +87,7 @@ namespace Code.Gameplay {
                 .Inject (_enemySpawnService)
                 .Inject (_gameplayUIService)
                 .Inject (_changePlayerLevel)
+                .Inject (_updateEcsGameService)
                 .Inject (_soundsConfig)
                 .Init ();
         }
