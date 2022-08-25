@@ -19,7 +19,7 @@ namespace Code.Gameplay.Network
                 foreach (var pdx in _player)
                 {
                     _player.GetEntity(pdx).Get<Strike>().Value = damage;
-                    entity.Destroy();
+                    entity.Del<NetworkAttack>();
                 }
             }
         }
