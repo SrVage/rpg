@@ -19,6 +19,7 @@ namespace Code.Services
             Container.Bind<IPlayfabCharacterService>().To<PlayfabCharacterService>().AsSingle();
             Container.Bind<IPlayerSaveService>().To<PlayerSaveService>().AsSingle();
             Container.Bind<IGameTypeService>().To<GameTypeService>().AsSingle();
+            Container.Bind<IUpdateEcsGameService>().To<UpdateEcsGameService>().AsSingle();
         }
     }
 }

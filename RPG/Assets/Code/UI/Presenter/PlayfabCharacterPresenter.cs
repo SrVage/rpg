@@ -13,10 +13,11 @@ namespace Code.UI.Presenter
         [SerializeField] private CreateCharacterView _createCharacterView;
         [SerializeField] private Button _startGame;
         [SerializeField] private Button _startOnlineGame;
-        [SerializeField] private PUNConnect _punConnect;
+        private PUNConnect _punConnect;
         private IPlayfabCharacterService _playfabCharacterService = null;
         [Inject] private DiContainer _container;
         [Inject] private IGameTypeService _gameTypeService;
+        [Inject] private IUpdateEcsGameService _updateEcsGameService;
         private int? _currentPlayer;
         
         [Inject]
@@ -34,6 +35,8 @@ namespace Code.UI.Presenter
             }
             _startGame.onClick.AddListener(StartGame);
             _startOnlineGame.onClick.AddListener(StartOnlineGame);
+            _punConnect = Object.FindObjectOfType<PUNConnect>();
+            _punConnect.InitAction(_updateEcsGameService.Update);
         }
 
         private void StartOnlineGame()

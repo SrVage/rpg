@@ -49,6 +49,8 @@ namespace Code.Gameplay {
                 .Add(new SetEnemyTargetSystem())
                 .Add(new PlayerAttackSystem<PlayerTag, EnemyTag>())
                 .Add(new PlayerAttackSystem<EnemyTag, PlayerTag>())
+                .Add(new PlayerAttackSystem<OtherPlayerTag, PlayerTag>())
+                .Add(new PlayerAttackSystem<PlayerTag, OtherPlayerTag>())
                 .Add(new DamageSystem())
                 .Add(new DelTargetSystem())
                 .Add(new CheckEndMoveSystem())

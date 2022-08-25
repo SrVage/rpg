@@ -12,10 +12,16 @@ namespace Code.Gameplay.Character
             {
                 ref var health = ref _attacked.Get1(adx).Value;
                 ref var damage = ref _attacked.Get2(adx).Value;
+                var entity = _attacked.GetEntity(adx);
                 health -= damage;
+                if (entity.Has<HealthNetworkRef>())
+                {
+                    ref var hnr = ref entity.Get<HealthNetworkRef>().Value;
+                    hnr.SetHealth(health);
+                }
                 if (health <= 0)
                 {
-                    _attacked.GetEntity(adx).Get<Death>();
+                    entity.Get<Death>();
                 }
             }
         }

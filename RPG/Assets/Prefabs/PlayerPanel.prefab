@@ -549,7 +549,6 @@ GameObject:
   - component: {fileID: 7018674814940878884}
   - component: {fileID: 7018674814940878881}
   - component: {fileID: 7018674814940878883}
-  - component: {fileID: 7465819697971863204}
   m_Layer: 5
   m_Name: PlayerPanel
   m_TagString: Untagged
@@ -606,19 +605,7 @@ MonoBehaviour:
   _createCharacterView: {fileID: 3946862466062906935}
   _startGame: {fileID: 7004736560763612963}
   _startOnlineGame: {fileID: 6916869843244129156}
-  _punConnect: {fileID: 7465819697971863204}
---- !u!114 &7465819697971863204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7018674814940878885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca279f96684465287cc959216429043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _punConnect: {fileID: 0}
 --- !u!1 &7018674814987501364
 GameObject:
   m_ObjectHideFlags: 0
