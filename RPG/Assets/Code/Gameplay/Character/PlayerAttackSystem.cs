@@ -38,9 +38,9 @@ namespace Code.Gameplay.Character
                         {
                             ref var damage = ref _player.Get2(pdx).Value;
                             enemyEntity.Get<Strike>().Value = damage;
-                            if (enemyEntity.Has<DamageNetworkRef>())
+                            if (_player.GetEntity(pdx).Has<DamageNetworkRef>())
                             {
-                                ref var damageNetwork = ref enemyEntity.Get<DamageNetworkRef>().Value;
+                                ref var damageNetwork = ref _player.GetEntity(pdx).Get<DamageNetworkRef>().Value;
                                 damageNetwork.SetDamage(damage);
                             }
                             enemyEntity.Del<AttackTarget>();

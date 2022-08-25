@@ -38,6 +38,7 @@ namespace Code.MonoBehaviours
         {
             if (_entity.IsNull()||!_entity.IsAlive())
                 return;
+            Debug.Log(_damage);
             if (_damage>0)
                 _entity.Get<NetworkAttack>().Damage = _damage;
         }
