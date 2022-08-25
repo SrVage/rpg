@@ -14,6 +14,7 @@ using Code.Gameplay.Enemy;
 using Code.Gameplay.Experience;
 using Code.Gameplay.Initialize;
 using Code.Gameplay.Move;
+using Code.Gameplay.Network;
 using Code.Gameplay.Systems;
 using Code.Gameplay.UI;
 using Leopotam.Ecs;
@@ -51,6 +52,7 @@ namespace Code.Gameplay {
                 .Add(new PlayerAttackSystem<EnemyTag, PlayerTag>())
                 .Add(new PlayerAttackSystem<OtherPlayerTag, PlayerTag>())
                 .Add(new PlayerAttackSystem<PlayerTag, OtherPlayerTag>())
+                .Add(new NetworkAttackSystem())
                 .Add(new DamageSystem())
                 .Add(new DelTargetSystem())
                 .Add(new CheckEndMoveSystem())

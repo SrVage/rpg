@@ -1,3 +1,4 @@
+using Code.Abstract;
 using Code.Abstract.Interfaces;
 using Code.Components.Common;
 using Leopotam.Ecs;
@@ -6,34 +7,39 @@ using UnityEngine;
 
 namespace Code.MonoBehaviours
 {
-    public class HealthNetwork:MonoBehaviourPunCallbacks, IPunObservable, IHealth
+    public class DamageNetwork:MonoBehaviourPunCallbacks, IPunObservable, IHealth
     {
-        [SerializeField]private int _health;
+        private int _damage;
         private EcsEntity _entity;
 
         public void SetEntity(EcsEntity entity) => _entity = entity;
-        public int GetHealth() => _health;
+        
+        public int GetDamage() => _damage;
 
         public void SetHealth(int health)
         {
-            _health = health;
+            _damage = health;
         }
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             if (stream.IsWriting)
-                stream.SendNext(_health);
+            {
+                stream.SendNext(_damage);
+                _damage = 0;
+            }
             else
             {
-                _health = (int)stream.ReceiveNext();
-                SetEntityHealth();
+                _damage = (int)stream.ReceiveNext();
+                SetEntityDamage();
             }
         }
 
-        private void SetEntityHealth()
+        private void SetEntityDamage()
         {
             if (_entity.IsNull()||!_entity.IsAlive())
                 return;
-            _entity.Get<Health>().Value = _health;
+            if (_damage>0)
+                _entity.Get<NetworkAttack>().Damage = _damage;
         }
     }
 }
