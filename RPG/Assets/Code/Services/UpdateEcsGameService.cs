@@ -26,5 +26,10 @@ namespace Code.Services
                 gameObject.Initial(_world.NewEntity(), _world);
             }
         }
+
+        public void Destroy(GameObject gameObject)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 }

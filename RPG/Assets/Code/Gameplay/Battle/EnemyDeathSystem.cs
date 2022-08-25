@@ -9,7 +9,7 @@ namespace Code.Gameplay.Battle
 {
     internal sealed class EnemyDeathSystem:IEcsRunSystem
     {
-        private readonly EcsFilter<GameObjectRef, Death, KillExperience> _death = null;
+        private readonly EcsFilter<GameObjectRef, Death, KillExperience, EnemyTag> _death = null;
         private readonly EcsFilter<PlayerTag> _player = null;
         public void Run()
         {

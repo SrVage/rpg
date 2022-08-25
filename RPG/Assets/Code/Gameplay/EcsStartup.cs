@@ -64,6 +64,7 @@ namespace Code.Gameplay {
                 .Add(new PlayerUIHealthSystem())
                 .Add(new ChangeExperienceSystem())
                 .Add(new PlayAudioSystem())
+                .Add(new DeathSystem())
                 //.Add(new DeleteAttackTargetSystem())
                 
                 .OneFrame<ClickPoint> ()
