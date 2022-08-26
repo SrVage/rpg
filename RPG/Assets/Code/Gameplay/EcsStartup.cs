@@ -9,6 +9,7 @@ using Code.Components.Input;
 using Code.Components.Navigation;
 using Code.Config;
 using Code.Gameplay.Battle;
+using Code.Gameplay.CameraSystems;
 using Code.Gameplay.Character;
 using Code.Gameplay.Enemy;
 using Code.Gameplay.Experience;
@@ -66,6 +67,7 @@ namespace Code.Gameplay {
                 .Add(new ChangeExperienceSystem())
                 .Add(new PlayAudioSystem())
                 .Add(new DeathSystem())
+                .Add(new LockCameraRotateSystem())
                 //.Add(new DeleteAttackTargetSystem())
                 
                 .OneFrame<ClickPoint> ()
@@ -82,6 +84,7 @@ namespace Code.Gameplay {
                 .OneFrame<AddExperience>()
                 .OneFrame<StepAudio>()
                 .OneFrame<AttackAudio>()
+                .OneFrame<CameraRotate>()
 
                 .Inject (_loadLevelService)
                 .Inject (_enemySpawnService)

@@ -26,6 +26,7 @@ namespace Code.Gameplay.Initialize
                     camera.m_LookAt = playerTransform;
                     camera.DestroyCinemachineComponent<CinemachineTransposer>();
                     var transposer = camera.AddCinemachineComponent<CinemachineTransposer>();
+                    transposer.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
                     transposer.m_FollowOffset.Set(0,20,-30);
                     transposer.m_YawDamping = 15;
                 }

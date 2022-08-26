@@ -66,7 +66,8 @@ namespace Code.Services
                                     Health = statistic["Health"],
                                     Damage = statistic["Damage"],
                                     Avatar =  _classesConfig.Players[statistic["Class"]].Avatar,
-                                    CharacterID = characterResult.CharacterId
+                                    CharacterID = characterResult.CharacterId,
+                                    BattlesWin = statistic["BattlesWin"],
                                 });
                             },
                             error => Debug.Log(error.Error));
@@ -97,7 +98,6 @@ namespace Code.Services
 
         private void LogFailure(PlayFabError obj)
         {
-            throw new System.NotImplementedException();
         }
 
         private void LogSuccess(PurchaseItemResult obj) => 
@@ -112,7 +112,7 @@ namespace Code.Services
                 ItemId = ItemID
             }, result =>
             {
-                UpdateCharacterStatistics(result.CharacterId);
+                UpdateNewCharacterStatistics(result.CharacterId);
             }, Debug.LogError);
         }
 
@@ -128,6 +128,7 @@ namespace Code.Services
                         {"XP", _choosePlayerService.GetPlayer.XP},
                         {"Damage", _choosePlayerService.GetPlayer.Damage},
                         {"Health", _choosePlayerService.GetPlayer.Health},
+                        {"BattlesWin", _choosePlayerService.GetPlayer.BattlesWin},
                     }
                 }, result =>
                 {
@@ -136,7 +137,7 @@ namespace Code.Services
                 Debug.LogError);
         }
 
-        public void UpdateCharacterStatistics(string characterId)
+        public void UpdateNewCharacterStatistics(string characterId)
         {
             PlayFabClientAPI.UpdateCharacterStatistics(new UpdateCharacterStatisticsRequest
                 {
@@ -148,6 +149,7 @@ namespace Code.Services
                         {"XP", 0},
                         {"Damage", _damage},
                         {"Health", _health},
+                        {"BattlesWin", 0},
                     }
                 }, result =>
                 {

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Code.Abstract
 {
@@ -16,5 +15,8 @@ namespace Code.Abstract
         [HideInInspector] public int Level;
         [HideInInspector] public int XP;
         [HideInInspector] public string CharacterID;
+        [HideInInspector] public int BattlesWin;
+        [HideInInspector] public int BattlesLose;
+        
     }
 }

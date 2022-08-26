@@ -20,6 +20,7 @@ namespace Code.Services
             Container.Bind<IPlayerSaveService>().To<PlayerSaveService>().AsSingle();
             Container.Bind<IGameTypeService>().To<GameTypeService>().AsSingle();
             Container.Bind<IUpdateEcsGameService>().To<UpdateEcsGameService>().AsSingle();
+            Container.Bind<IGameplayCommandUIService>().To<GameplayCommandUIService>().AsSingle();
         }
     }
 }

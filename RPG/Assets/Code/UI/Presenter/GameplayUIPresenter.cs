@@ -1,3 +1,4 @@
+using Code.Abstract.Interfaces;
 using Code.UI.View;
 using DG.Tweening;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Code.UI.Presenter
     {
         [SerializeField] private GameplayUIView _gameplayUIView;
         [Inject] private GamePauseMenuPresenter _gamePauseMenuPresenter;
+        [Inject] private IGameplayCommandUIService _gameplayCommandUIService;
 
         [Inject]
         public void Init()
@@ -18,6 +20,7 @@ namespace Code.UI.Presenter
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
             _gameplayUIView.Menu.onClick.AddListener(()=>_gamePauseMenuPresenter.gameObject.SetActive(true));
+            _gameplayUIView.CameraLock.onClick.AddListener(()=>_gameplayCommandUIService.ChangeRotateCamera());
         }
         public void ChangeHealth(float percent) => 
             _gameplayUIView.Health.fillAmount = percent;

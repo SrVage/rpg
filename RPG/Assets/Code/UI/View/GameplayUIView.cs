@@ -11,6 +11,7 @@ namespace Code.UI.View
         [SerializeField] private TextMeshProUGUI _level;
         [SerializeField] private RectTransform _experienceTransform;
         [SerializeField] private Button _menu;
+        [SerializeField] private Button _cameraLock;
         public Image Health => _health;
         public Image Experience => _experience;
         public string Level
@@ -19,5 +20,6 @@ namespace Code.UI.View
         }
         public RectTransform ExperienceTransform => _experienceTransform;
         public Button Menu => _menu;
+        public Button CameraLock => _cameraLock;
     }
 }

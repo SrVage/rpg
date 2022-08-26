@@ -14,7 +14,8 @@ namespace Code.Gameplay.Enemy
             foreach (var sdx in _spawnSignal)
             {
                 ref var spawnPoint = ref _spawnSignal.Get1(sdx).Value;
-                _enemySpawnService.Spawn(spawnPoint);
+                ref var spawnType = ref _spawnSignal.Get1(sdx).Type;
+                _enemySpawnService.Spawn(spawnPoint, spawnType);
             }
         }
     }

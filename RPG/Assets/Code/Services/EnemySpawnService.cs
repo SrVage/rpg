@@ -1,4 +1,5 @@
 using Code.Abstract;
+using Code.Abstract.Enums;
 using Code.Abstract.Interfaces;
 using Code.Components.Common;
 using Code.Components.Enemy;
@@ -13,7 +14,7 @@ namespace Code.Services
     internal sealed class EnemySpawnService:IEnemySpawnService
     {
         private readonly EnemyConfig _enemyConfig = null;
-        private readonly EcsWorld _world;
+        private readonly EcsWorld _world = null;
 
         [Inject]
         public EnemySpawnService(EnemyConfig enemyConfig, EcsWorld world)
@@ -22,18 +23,19 @@ namespace Code.Services
             _world = world;
         }
 
-        public async void Spawn(Vector3 spawnPoint)
+        public async void Spawn(Vector3 spawnPoint, EnemyType type)
         {
-            var enemyPrefab = _enemyConfig.Enemies[0].Prefab;
+            Debug.Log(spawnPoint+" "+type);
+            var enemyPrefab = _enemyConfig.Enemies[(int)type].Prefab;
             var enemyGameObject = enemyPrefab.InstantiateAsync(spawnPoint, Quaternion.identity);
             await enemyGameObject.Task;
             var enemyEntity = _world.NewEntity();
             enemyGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(enemyEntity, _world);
-            enemyEntity.Get<Health>().Value = _enemyConfig.Enemies[0].Health;
-            enemyEntity.Get<Health>().Maximum = _enemyConfig.Enemies[0].Health;
-            enemyEntity.Get<Damage>().Value = _enemyConfig.Enemies[0].Damage;
+            enemyEntity.Get<Health>().Value = _enemyConfig.Enemies[(int)type].Health;
+            enemyEntity.Get<Health>().Maximum = _enemyConfig.Enemies[(int)type].Health;
+            enemyEntity.Get<Damage>().Value = _enemyConfig.Enemies[(int)type].Damage;
             enemyEntity.Get<PatrolPoint>().Value = spawnPoint;
-            enemyEntity.Get<KillExperience>().Value = _enemyConfig.Enemies[0].KillExperience;
+            enemyEntity.Get<KillExperience>().Value = _enemyConfig.Enemies[(int)type].KillExperience;
         }
     }
 }

@@ -22,10 +22,10 @@ MonoBehaviour:
     Damage: 5
     KillExperience: 10
   - Prefab:
-      m_AssetGUID: 
+      m_AssetGUID: 870982cf02cc258429948de0da1e4ad8
       m_SubObjectName: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
-    Health: 0
-    Damage: 0
-    KillExperience: 0
+    Health: 150
+    Damage: 20
+    KillExperience: 40

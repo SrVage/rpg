@@ -25,7 +25,10 @@ namespace Code.MonoBehaviours
                 {
                     if (_entity.Has<SpawnTimer>())
                         return;
-                    _world.NewEntity().Get<SpawnSignal>().Value = transform.position;
+                    Debug.Log(transform.position);
+                    var signal= _world.NewEntity();
+                    signal.Get<SpawnSignal>().Value = transform.position;
+                    signal.Get<SpawnSignal>().Type = _entity.Get<SpawnType>().Value;
                     _entity.Get<SpawnTimer>().Value = 20;
                 }
                 /*ref var entity = ref _world.NewEntity().Get<AttackTrigger>();

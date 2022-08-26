@@ -9,6 +9,6 @@ namespace Code.Abstract.Interfaces
         void GetCharacters();
         void SelectCharacter(int id);
         void CreateCharacter(string name, int health, int damage, int selectClass, Action end);
-        void UpdateCharacterStatistics(string characterId);
+        void UpdateNewCharacterStatistics(string characterId);
     }
 }
