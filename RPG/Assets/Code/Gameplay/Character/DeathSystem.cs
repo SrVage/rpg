@@ -12,13 +12,17 @@ namespace Code.Gameplay.Character
         private readonly EcsFilter<PlayerTag, GameObjectRef, Death> _player = null;
         private readonly EcsFilter<OtherPlayerTag, GameObjectRef, Death> _otherPlayer = null;
         private readonly IUpdateEcsGameService _updateEcsGameService = null;
+        private readonly IChoosePlayerService _choosePlayerService = null;
+        private readonly IPlayerSaveService _playfabSaveService = null;
         
         public void Run()
         {
             foreach (var odx in _otherPlayer)
             {
-                ref var gameObject = ref _otherPlayer.Get2(odx).GameObject;
-                _updateEcsGameService.Destroy(gameObject);
+                //ref var gameObject = ref _otherPlayer.Get2(odx).GameObject;
+                _choosePlayerService.GetPlayer.BattlesWin += 1;
+                _playfabSaveService.Save();
+                //_updateEcsGameService.Destroy(gameObject);
                 _otherPlayer.GetEntity(odx).Destroy();
             }
 

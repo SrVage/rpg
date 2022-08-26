@@ -1,6 +1,4 @@
-using System;
 using Code.Abstract;
-using Code.Components;
 using Code.Components.Animations;
 using Code.Components.Common;
 using Code.Components.Input;
@@ -48,6 +46,8 @@ namespace Code.Gameplay.Character
                         }
                         else
                         {
+                            if (_player.GetEntity(pdx).Has<IsAnimation>())
+                                continue;
                             playerTransform.LookAt(enemyTransform);
                             _player.GetEntity(pdx).Get<Punch>();
                             _player.GetEntity(pdx).Get<IsAnimation>();

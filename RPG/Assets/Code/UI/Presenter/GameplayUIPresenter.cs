@@ -11,6 +11,7 @@ namespace Code.UI.Presenter
         [SerializeField] private GameplayUIView _gameplayUIView;
         [Inject] private GamePauseMenuPresenter _gamePauseMenuPresenter;
         [Inject] private IGameplayCommandUIService _gameplayCommandUIService;
+        [Inject] private PlayerCharacteristicsPresenter _playerCharacteristicsPresenter;
 
         [Inject]
         public void Init()
@@ -21,6 +22,7 @@ namespace Code.UI.Presenter
             rect.offsetMax = Vector2.zero;
             _gameplayUIView.Menu.onClick.AddListener(()=>_gamePauseMenuPresenter.gameObject.SetActive(true));
             _gameplayUIView.CameraLock.onClick.AddListener(()=>_gameplayCommandUIService.ChangeRotateCamera());
+            _gameplayUIView.Characteristics.onClick.AddListener(() => _playerCharacteristicsPresenter.Switch());
         }
         public void ChangeHealth(float percent) => 
             _gameplayUIView.Health.fillAmount = percent;

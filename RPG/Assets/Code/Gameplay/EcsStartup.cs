@@ -14,6 +14,7 @@ using Code.Gameplay.Character;
 using Code.Gameplay.Enemy;
 using Code.Gameplay.Experience;
 using Code.Gameplay.Initialize;
+using Code.Gameplay.Input;
 using Code.Gameplay.Move;
 using Code.Gameplay.Network;
 using Code.Gameplay.Systems;
@@ -31,6 +32,8 @@ namespace Code.Gameplay {
         [Inject] private IGameplayUIService _gameplayUIService;
         [Inject] private IChangePlayerLevel _changePlayerLevel;
         [Inject] private IUpdateEcsGameService _updateEcsGameService;
+        [Inject] private IChoosePlayerService _choosePlayerService;
+        [Inject] private IPlayerSaveService _playerSaveService;
         [Inject] private SoundsConfig _soundsConfig;
         [Inject] private EcsWorld _world;
         
@@ -92,6 +95,8 @@ namespace Code.Gameplay {
                 .Inject (_changePlayerLevel)
                 .Inject (_updateEcsGameService)
                 .Inject (_soundsConfig)
+                .Inject (_choosePlayerService)
+                .Inject (_playerSaveService)
                 .Init ();
         }
 

@@ -929,3 +929,5 @@ MonoBehaviour:
     type: 3}
   _gamePauseMenuPresenter: {fileID: 4381710566993659074, guid: 67fc437a8831444e889f599134269426,
     type: 3}
+  _playerCharacteristicsPresenter: {fileID: 305790055889721269, guid: 36e12e8b1d26a4281ac28bb7a799c85e,
+    type: 3}

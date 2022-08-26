@@ -1,6 +1,6 @@
 using Code.Abstract;
 using Code.Abstract.Interfaces;
-using Code.Components.Common;
+using Code.Components.Animations;
 using Leopotam.Ecs;
 using Photon.Pun;
 using UnityEngine;
@@ -39,8 +39,11 @@ namespace Code.MonoBehaviours
             if (_entity.IsNull()||!_entity.IsAlive())
                 return;
             Debug.Log(_damage);
-            if (_damage>0)
+            if (_damage > 0)
+            {
+                _entity.Get<Punch>();
                 _entity.Get<NetworkAttack>().Damage = _damage;
+            }
         }
     }
 }
