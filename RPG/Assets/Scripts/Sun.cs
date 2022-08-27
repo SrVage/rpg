@@ -18,6 +18,8 @@ public class Sun : MonoBehaviour
 
     void Update()
     {
+        if (Time.frameCount%3!=0)
+            return;
         gameObject.transform.Rotate(0, 0.01f, 0, Space.Self);
         //Debug.Log(transform.localRotation.eulerAngles.x);
         if (transform.localRotation.eulerAngles.x > 0 && transform.localRotation.eulerAngles.x <180)

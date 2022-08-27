@@ -85,7 +85,7 @@ namespace Code.Services
             playerEntity.Get<Damage>().Value = _choosePlayerService.GetPlayer.Damage;
             _changePlayerLevel.SetPlayer(playerEntity);
             _playerSaveService.SetPlayer(playerEntity);
-            var camera = GameObject.Instantiate(_playersClassesConfig.VirtualCamera);
+            var camera = GameObject.Instantiate(_playersClassesConfig.VirtualCamera, _playersClassesConfig.VirtualCamera.transform.position, _playersClassesConfig.VirtualCamera.transform.rotation);
             camera.GetComponent<MonoBehaviourToEntity>().Initial(_world.NewEntity(), _world);
             _world.NewEntity().Get<LoadLevelDone>();
             _gameplayUIService.ShowGamePlayUI();

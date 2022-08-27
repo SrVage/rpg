@@ -25,7 +25,6 @@ namespace Code.MonoBehaviours
                 {
                     if (_entity.Has<SpawnTimer>())
                         return;
-                    Debug.Log(transform.position);
                     var signal= _world.NewEntity();
                     signal.Get<SpawnSignal>().Value = transform.position;
                     signal.Get<SpawnSignal>().Type = _entity.Get<SpawnType>().Value;

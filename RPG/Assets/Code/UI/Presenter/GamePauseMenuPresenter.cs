@@ -19,6 +19,7 @@ namespace Code.UI.Presenter
             rect.offsetMax = Vector2.zero;
             _gamePauseMenuView.SaveGameButton.onClick.AddListener(_playerSaveService.Save);
             _gamePauseMenuView.ResumeGameButton.onClick.AddListener(CloseWindow);
+            _gamePauseMenuView.ExitGameButton.onClick.AddListener(() => Application.Quit());
         }
 
         private void CloseWindow()

@@ -15,6 +15,7 @@ namespace Code.Services
     {
         private readonly EnemyConfig _enemyConfig = null;
         private readonly EcsWorld _world = null;
+        private int _number = 0;
 
         [Inject]
         public EnemySpawnService(EnemyConfig enemyConfig, EcsWorld world)
@@ -25,10 +26,11 @@ namespace Code.Services
 
         public async void Spawn(Vector3 spawnPoint, EnemyType type)
         {
-            Debug.Log(spawnPoint+" "+type);
             var enemyPrefab = _enemyConfig.Enemies[(int)type].Prefab;
             var enemyGameObject = enemyPrefab.InstantiateAsync(spawnPoint, Quaternion.identity);
             await enemyGameObject.Task;
+            enemyGameObject.Result.name += _number;
+            _number++;
             var enemyEntity = _world.NewEntity();
             enemyGameObject.Result.GetComponent<MonoBehaviourToEntity>().Initial(enemyEntity, _world);
             enemyEntity.Get<Health>().Value = _enemyConfig.Enemies[(int)type].Health;

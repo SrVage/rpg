@@ -97290,8 +97290,7 @@ AnimationClip:
   - time: 0.6
     functionName: Punch
     data: 
-    objectReferenceParameter: {fileID: 1144028080539786, guid: 186d1f74b625fa744abf8a07b350ce1d,
-      type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

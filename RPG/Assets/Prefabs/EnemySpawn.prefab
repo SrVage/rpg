@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 2
   m_Name: EnemySpawn
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aaa0878d0fb4e66a609df8fda9a97b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
 --- !u!114 &2110102943004635328
 MonoBehaviour:
   m_ObjectHideFlags: 0

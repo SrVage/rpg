@@ -30,7 +30,7 @@ namespace Code.Gameplay.Character
             {
                 ref var gameObject = ref _player.Get2(pdx).GameObject;
                 _updateEcsGameService.Destroy(gameObject);
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(2);
             }
         }
     }

@@ -3,6 +3,7 @@ using Code.Abstract;
 using Code.Components;
 using Code.Components.Create;
 using Leopotam.Ecs;
+using UnityEngine;
 
 namespace Code.Gameplay.Initialize
 {
@@ -22,6 +23,13 @@ namespace Code.Gameplay.Initialize
                 foreach (var cdx in _camera)
                 {
                     ref var camera = ref _camera.Get1(cdx).Value;
+                    var cameras = Object.FindObjectsOfType<CinemachineVirtualCamera>();
+                    foreach (var cam in cameras)
+                    {
+                        if (cam == camera)
+                            continue;
+                        cam.enabled = false;
+                    }
                     camera.m_Follow = playerTransform;
                     camera.m_LookAt = playerTransform;
                     camera.DestroyCinemachineComponent<CinemachineTransposer>();
@@ -29,6 +37,7 @@ namespace Code.Gameplay.Initialize
                     transposer.m_BindingMode = CinemachineTransposer.BindingMode.LockToTarget;
                     transposer.m_FollowOffset.Set(0,20,-30);
                     transposer.m_YawDamping = 15;
+                    camera.enabled = true;
                 }
             }
         }

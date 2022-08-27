@@ -1,6 +1,7 @@
 using Code.Abstract;
 using Code.Components.Animations;
 using Code.Components.Common;
+using Code.Components.Enemy;
 using Code.Components.Input;
 using Code.Components.Navigation;
 using Leopotam.Ecs;
@@ -23,12 +24,14 @@ namespace Code.Gameplay.Character
                 ref var enemyTransform = ref _enemy.Get1(edx).Transform;
                 foreach (var pdx in _player)
                 {
-                    ref var playerTransform = ref _player.Get1(edx).Transform;
+                    ref var playerTransform = ref _player.Get1(pdx).Transform;
                     ref var enemyEntity = ref _enemy.GetEntity(edx);
                     if (Vector3.Distance(playerTransform.position, enemyTransform.position) > AttackDistance)
                     {
-                        _world.NewEntity().Get<TargetPoint>().Value = enemyTransform.position;
-                        enemyEntity.Del<AttackTarget>();
+                        _player.GetEntity(pdx).Del<IsAnimation>();
+                        if (enemyEntity.Has<EnemyTag>())
+                            _world.NewEntity().Get<TargetPoint>().Value = enemyTransform.position;
+                        //enemyEntity.Del<AttackTarget>();
                     }
                     else
                     {
