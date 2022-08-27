@@ -21,6 +21,7 @@ namespace Code.Services
             Container.Bind<IGameTypeService>().To<GameTypeService>().AsSingle();
             Container.Bind<IUpdateEcsGameService>().To<UpdateEcsGameService>().AsSingle();
             Container.Bind<IGameplayCommandUIService>().To<GameplayCommandUIService>().AsSingle();
+            Container.Bind<IGetThingsFromChest>().To<GetThingsFromChest>().AsSingle();
         }
     }
 }

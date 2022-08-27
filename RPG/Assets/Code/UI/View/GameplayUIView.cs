@@ -13,6 +13,8 @@ namespace Code.UI.View
         [SerializeField] private Button _menu;
         [SerializeField] private Button _cameraLock;
         [SerializeField] private Button _characteristics;
+        [SerializeField] private Button _healthPotion;
+        [SerializeField] private TextMeshProUGUI _potionCount;
         public Image Health => _health;
         public Image Experience => _experience;
         public string Level
@@ -23,5 +25,11 @@ namespace Code.UI.View
         public Button Menu => _menu;
         public Button CameraLock => _cameraLock;
         public Button Characteristics => _characteristics;
+        public Button HealthPotion => _healthPotion;
+
+        public string PotionCount
+        {
+            set => _potionCount.text = value;
+        }
     }
 }

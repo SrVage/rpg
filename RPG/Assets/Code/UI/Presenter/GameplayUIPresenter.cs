@@ -1,3 +1,4 @@
+using System;
 using Code.Abstract.Interfaces;
 using Code.UI.View;
 using DG.Tweening;
@@ -12,6 +13,7 @@ namespace Code.UI.Presenter
         [Inject] private GamePauseMenuPresenter _gamePauseMenuPresenter;
         [Inject] private IGameplayCommandUIService _gameplayCommandUIService;
         [Inject] private PlayerCharacteristicsPresenter _playerCharacteristicsPresenter;
+        private Action _usePotion;
 
         [Inject]
         public void Init()
@@ -24,6 +26,27 @@ namespace Code.UI.Presenter
             _gameplayUIView.CameraLock.onClick.AddListener(()=>_gameplayCommandUIService.ChangeRotateCamera());
             _gameplayUIView.Characteristics.onClick.AddListener(() => _playerCharacteristicsPresenter.Switch());
         }
+
+        public void SetPotion(int numbers)
+        {
+            if (numbers > 0)
+            {
+                _gameplayUIView.HealthPotion.interactable = true;
+                _gameplayUIView.PotionCount = numbers.ToString();
+            }
+            else
+            {
+                _gameplayUIView.PotionCount = "";
+                _gameplayUIView.HealthPotion.interactable = false;
+            }
+        }
+
+        public void SetPotionAction(Action action)
+        {
+            _usePotion = action;
+            _gameplayUIView.HealthPotion.onClick.AddListener(_usePotion.Invoke);
+        }
+
         public void ChangeHealth(float percent) => 
             _gameplayUIView.Health.fillAmount = percent;
 

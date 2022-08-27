@@ -11,6 +11,7 @@ using Code.Config;
 using Code.Gameplay.Battle;
 using Code.Gameplay.CameraSystems;
 using Code.Gameplay.Character;
+using Code.Gameplay.ChestSystems;
 using Code.Gameplay.Enemy;
 using Code.Gameplay.Experience;
 using Code.Gameplay.Initialize;
@@ -34,6 +35,7 @@ namespace Code.Gameplay {
         [Inject] private IUpdateEcsGameService _updateEcsGameService;
         [Inject] private IChoosePlayerService _choosePlayerService;
         [Inject] private IPlayerSaveService _playerSaveService;
+        [Inject] private IGetThingsFromChest _getThingsFromChest;
         [Inject] private SoundsConfig _soundsConfig;
         [Inject] private EcsWorld _world;
         
@@ -48,10 +50,12 @@ namespace Code.Gameplay {
             _systems
                 .Add(new LoadLevelSystem())
                 .Add(new BindCameraSystem())
+                .Add(new GetInventorySystem())
                 .Add (new InputSystem())
                 .Add (new ClickPointHandlerSystem(Camera.main))
                 .Add(new RaycastHandlerSystem())
                 .Add(new SetTargetSystem())
+                .Add(new TargetHandlerSystem())
                 .Add(new SetEnemyTargetSystem())
                 .Add(new PlayerAttackSystem<PlayerTag, EnemyTag>())
                 .Add(new PlayerAttackSystem<EnemyTag, PlayerTag>())
@@ -59,6 +63,7 @@ namespace Code.Gameplay {
                 .Add(new PlayerAttackSystem<PlayerTag, OtherPlayerTag>())
                 .Add(new NetworkAttackSystem())
                 .Add(new DamageSystem())
+                .Add(new UsePotionSystem())
                 .Add(new DelTargetSystem())
                 .Add(new CheckEndMoveSystem())
                 .Add(new EnemySpawnTimerSystem())
@@ -70,6 +75,7 @@ namespace Code.Gameplay {
                 .Add(new ChangeExperienceSystem())
                 .Add(new PlayAudioSystem())
                 .Add(new DeathSystem())
+                .Add(new ChestOpenSystem())
                 .Add(new LockCameraRotateSystem())
                 //.Add(new DeleteAttackTargetSystem())
                 
@@ -88,6 +94,9 @@ namespace Code.Gameplay {
                 .OneFrame<StepAudio>()
                 .OneFrame<AttackAudio>()
                 .OneFrame<CameraRotate>()
+                .OneFrame<Doing>()
+                .OneFrame<Target>()
+                .OneFrame<UsePotion>()
 
                 .Inject (_loadLevelService)
                 .Inject (_enemySpawnService)
@@ -97,6 +106,7 @@ namespace Code.Gameplay {
                 .Inject (_soundsConfig)
                 .Inject (_choosePlayerService)
                 .Inject (_playerSaveService)
+                .Inject (_getThingsFromChest)
                 .Init ();
         }
 

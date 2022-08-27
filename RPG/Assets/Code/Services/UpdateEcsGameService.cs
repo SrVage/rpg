@@ -30,6 +30,7 @@ namespace Code.Services
         public void Destroy(GameObject gameObject)
         {
             PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Disconnect();
         }
     }
 }

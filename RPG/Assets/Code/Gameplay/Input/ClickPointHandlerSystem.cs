@@ -33,8 +33,11 @@ namespace Code.Gameplay.Systems
                     {
                         if (entity.Entity.Has<EnemyTag>() || entity.Entity.Has<OtherPlayerTag>())
                         {
-                            Debug.Log("Attack");
                             entity.Entity.Get<AttackTarget>();
+                        }
+                        if (entity.Entity.Has<Chest>())
+                        {
+                            entity.Entity.Get<Target>();
                         }
                     }
                     else
